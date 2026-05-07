@@ -1,14 +1,14 @@
 import { ArrowUpRight, Play } from "lucide-react";
 
 /**
- * STORIES SECTION (II)
+ * STORIES SECTION (II): "Selected work"
  * --------------------------------------------------------------------------
- * Audrey's editing portfolio. Each card is a video she edited, linking out
- * to where it lives (YouTube). YouTube thumbnails resolve automatically
- * from the videoId, no upload to /public/stories needed.
+ * Audrey's editing portfolio. All seven vlogs were edited for Mhar Travels
+ * and are hosted on YouTube. Each card opens the published video in a new
+ * tab. Titles and descriptions are pulled from the actual YouTube pages.
  *
  * To update a card: edit the matching object below.
- * To add an edit: append to VLOGS. The grid auto-flows.
+ * To add an edit: append to VLOGS. Thumbnails resolve from videoId.
  * --------------------------------------------------------------------------
  */
 
@@ -23,55 +23,65 @@ type Vlog = {
 const ytThumb = (videoId: string): string =>
   `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 
+const CLIENT = "Mhar Travels";
+const CLIENT_URL = "https://www.youtube.com/@mharluxebeautyandtravel8006";
+
 const VLOGS: readonly Vlog[] = [
   {
     id: "v01",
     videoId: "HWc3wp7V0pI",
     url: "https://youtu.be/HWc3wp7V0pI",
-    title: "Vlog · 01",
-    blurb: "A vlog I edited.",
+    title: "Disneyland Adventure",
+    blurb:
+      "A magical return to Disneyland, a birthday gift ticket that brought back treasured memories. Entrance photos, rides, food, the iconic castle, and rediscovering It's a Small World.",
   },
   {
     id: "v02",
     videoId: "q3neWvXH3KA",
     url: "https://youtu.be/q3neWvXH3KA",
-    title: "Vlog · 02",
-    blurb: "A vlog I edited.",
+    title: "Daddy's 85th Birthday Celebration",
+    blurb:
+      "A timeless celebration of Daddy's milestone birthday, filled with love, laughter, music, and family moments. The joy of preparing, partying, and treasuring memories together.",
   },
   {
     id: "v03",
     videoId: "vWZsN-FEa0U",
     url: "https://youtu.be/vWZsN-FEa0U",
-    title: "Vlog · 03",
-    blurb: "A vlog I edited.",
+    title: "Bolinao Waterfalls Adventure",
+    blurb:
+      "From beachside chill to waterfall thrills: an unforgettable day in Bolinao, Pangasinan. A tour of AMS Beach Resort, breakfast with the owner, then on to Bolinao Falls.",
   },
   {
     id: "v04",
     videoId: "tkazmeKla3c",
     url: "https://youtu.be/tkazmeKla3c",
-    title: "Vlog · 04",
-    blurb: "A vlog I edited.",
+    title: "First Time in Bolinao, Pangasinan (Part 1)",
+    blurb:
+      "First trip to Bolinao, Pangasinan. Stopovers in Dagupan, buying fresh kambing and talaba, then bulalo breakfast at Papa Cip.",
   },
   {
     id: "v05",
     videoId: "wdeqDV_BxYM",
     url: "https://youtu.be/wdeqDV_BxYM",
-    title: "Vlog · 05",
-    blurb: "A vlog I edited.",
+    title: "Shopping in HomeGoods for Puppy Essentials",
+    blurb:
+      "A cozy day filled with coffee, walks, and shopping. Simón Bolívar Park, the main street, and HomeGoods for puppy essentials.",
   },
   {
     id: "v06",
     videoId: "Fj7DknyXEKw",
     url: "https://youtu.be/Fj7DknyXEKw",
-    title: "Vlog · 06",
-    blurb: "A vlog I edited.",
+    title: "Italy Diaries: Milan, Lake Como, Florence, Vatican & Rome",
+    blurb:
+      "Ciao from Italy. From Milan's bustling streets and Lake Como's breathtaking views, to the solemn Vatican pilgrimage and the grand finale at Trevi Fountain.",
   },
   {
     id: "v07",
     videoId: "RPyFMsgOfBY",
     url: "https://youtu.be/RPyFMsgOfBY",
-    title: "Vlog · 07",
-    blurb: "A vlog I edited.",
+    title: "Paris Diaries: Eiffel Tower, Louvre, Montmartre",
+    blurb:
+      "Trip to France, from airport departure to seeing the Eiffel Tower sparkle at night. The Eiffel Tower, the Mona Lisa inside the Louvre, and the Sacré-Cœur Basilica.",
   },
 ] as const;
 
@@ -112,7 +122,10 @@ function VlogCard({ vlog }: { vlog: Vlog }) {
           <h3 className="font-display text-base leading-snug text-emerald-950 md:text-lg">
             {vlog.title}
           </h3>
-          <dl className="mt-3 grid grid-cols-3 gap-x-4 border-t border-emerald-950/15 pt-3">
+          <p className="mt-2 text-xs leading-relaxed text-emerald-950/70">
+            {vlog.blurb}
+          </p>
+          <dl className="mt-4 grid grid-cols-3 gap-x-4 border-t border-emerald-950/15 pt-3">
             <div>
               <dt className="label-caps text-emerald-950/55">Type</dt>
               <dd className="mt-1 text-[11px] text-emerald-950">
@@ -120,8 +133,10 @@ function VlogCard({ vlog }: { vlog: Vlog }) {
               </dd>
             </div>
             <div>
-              <dt className="label-caps text-emerald-950/55">Hosted</dt>
-              <dd className="mt-1 text-[11px] text-emerald-950">YouTube</dd>
+              <dt className="label-caps text-emerald-950/55">Client</dt>
+              <dd className="mt-1 text-[11px] text-emerald-950">
+                Mhar Travels
+              </dd>
             </div>
             <div className="text-right">
               <dt className="label-caps text-emerald-950/55">Watch</dt>
@@ -147,18 +162,26 @@ export default function Stories() {
           </span>
           <span className="eyebrow__label">Selected work</span>
           <span className="eyebrow__meta">
-            {VLOGS.length} edits · still rolling
+            {VLOGS.length} edits
           </span>
         </div>
 
         <div className="mt-10 grid grid-cols-1 items-end gap-6 lg:grid-cols-12">
           <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-light leading-[1] tracking-[-0.02em] text-emerald-950 lg:col-span-8">
-            Cuts that{" "}
-            <span className="italic text-gold-500">ran.</span>
+            Edited for{" "}
+            <a
+              href={CLIENT_URL}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="italic text-gold-500 underline-offset-4 transition hover:underline"
+            >
+              {CLIENT}
+            </a>
+            .
           </h2>
           <p className="text-sm leading-relaxed text-emerald-950/70 lg:col-span-4">
-            A rolling portfolio of videos I&rsquo;ve edited. Each card opens
-            the published cut in a new tab.
+            All seven vlogs below were cut for Mhar Travels and published on
+            YouTube. Click any card to watch the full edit.
           </p>
         </div>
 
