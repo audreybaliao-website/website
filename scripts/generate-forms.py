@@ -34,7 +34,7 @@ ROOT = Path(__file__).resolve().parent.parent
 PUBLIC = ROOT / "public"
 PUBLIC.mkdir(exist_ok=True)
 
-# Brand palette — matches the website's Tailwind emerald/gold tokens.
+# Brand palette: matches the website's Tailwind emerald/gold tokens.
 EMERALD_950 = RGBColor(0x0A, 0x24, 0x18)
 EMERALD_700 = RGBColor(0x1A, 0x61, 0x3E)
 EMERALD_500 = RGBColor(0x2C, 0x94, 0x5F)
@@ -299,7 +299,7 @@ def build_service_contract() -> Path:
     page_setup(doc)
     add_letterhead(doc)
 
-    heading(doc, "Service contract — video editing")
+    heading(doc, "Service contract for video editing")
     body(
         doc,
         "Signed once a project is booked. Fill in the blanks, sign at the "
@@ -314,7 +314,7 @@ def build_service_contract() -> Path:
     field(
         doc,
         "  Editor",
-        "Audrey Baliao — Philippines",
+        "Audrey Baliao, Philippines",
     )
     field(doc, "  Client", BLANK_LONG)
     field(doc, "  Client address / location", BLANK_LONG)

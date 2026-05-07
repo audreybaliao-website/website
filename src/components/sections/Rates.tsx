@@ -3,83 +3,30 @@ import {
   CalendarRange,
   Check,
   FileText,
-  Music,
   Tag,
-  Video,
   X,
 } from "lucide-react";
+import RateCalculator from "@/components/RateCalculator";
 import {
   DISCOUNTS,
   PRICING,
   RETAINER_PLANS,
   RETAINER_PER_VIDEO,
-  peso,
+  formatPHP as peso,
 } from "@/lib/pricing";
 
 /**
- * RATES SECTION (V)
+ * RATES SECTION (III)
  * --------------------------------------------------------------------------
- * Static rate sheet — no calculator. Three blocks:
- *   1. Per-project pricing card  (base rate + add-ons + complexity tiers)
- *   2. Retainer plans table       (monthly bundles with 50/50 schedule)
- *   3. Discounts ladder           (5/10/15/20% with reasons)
+ * Three blocks:
+ *   1. Live RateCalculator (per-project quoting)
+ *   2. Per-minute breakdown + Monthly retainer table
+ *   3. Discount ladder + Document downloads (intake form, service contract)
  *
- * Plus contract + intake form download links at the bottom.
- *
- * To change a number: edit src/lib/pricing.ts. Every consumer (this section,
- * the intake form, the manual PDF) reads from there.
+ * To change a number: edit src/lib/pricing.ts. Every consumer reads from
+ * there.
  * --------------------------------------------------------------------------
  */
-
-type ServiceTier = {
-  name: string;
-  blurb: string;
-  starting: number;
-  bullets: readonly string[];
-  icon: React.ReactNode;
-};
-
-const TIERS: readonly ServiceTier[] = [
-  {
-    name: "Vlog edit",
-    blurb:
-      "Daily-life vlogs and short-form social cuts. Up to 30 min of raw footage.",
-    starting: 1_200,
-    bullets: [
-      "Music · Light",
-      "Captions · Standard",
-      "Cliffhanger opener",
-      "One revision round",
-    ],
-    icon: <Video className="h-5 w-5" aria-hidden="true" />,
-  },
-  {
-    name: "Music video edit",
-    blurb:
-      "Beat-matched cuts, color grading, and rhythm built around the track.",
-    starting: 2_500,
-    bullets: [
-      "Music · Heavy (synced)",
-      "Effects · Detailed",
-      "Color grade pass",
-      "One revision round",
-    ],
-    icon: <Music className="h-5 w-5" aria-hidden="true" />,
-  },
-  {
-    name: "News / project edit",
-    blurb:
-      "Tight, on-brief story-first cuts produced as project pieces or briefs.",
-    starting: 1_800,
-    bullets: [
-      "Captions · Standard",
-      "Branded intro / outro",
-      "Thumbnail",
-      "One revision round",
-    ],
-    icon: <FileText className="h-5 w-5" aria-hidden="true" />,
-  },
-] as const;
 
 export default function Rates() {
   return (
@@ -87,7 +34,7 @@ export default function Rates() {
       <div className="mx-auto max-w-7xl">
         <div className="eyebrow">
           <span className="eyebrow__numeral" aria-hidden="true">
-            V
+            III
           </span>
           <span className="eyebrow__label">Rate sheet</span>
           <span className="eyebrow__meta">PHP · negotiable per project</span>
@@ -95,61 +42,32 @@ export default function Rates() {
 
         <div className="mt-10 grid grid-cols-1 items-end gap-6 lg:grid-cols-12">
           <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-light leading-[1] tracking-[-0.02em] text-emerald-950 lg:col-span-8">
-            Plain-paper{" "}
-            <span className="italic text-gold-500">pricing.</span>
+            Build your{" "}
+            <span className="italic text-gold-500">quote.</span>
           </h2>
           <p className="text-sm leading-relaxed text-emerald-950/70 lg:col-span-4">
-            Starting points for the three things I edit most. Final quote always
-            confirmed in writing once I&rsquo;ve seen the footage and brief.
+            Toggle what you need; the total updates as you go. Final quote is
+            always confirmed in writing once I&rsquo;ve seen the footage.
           </p>
         </div>
 
-        {/* PER-PROJECT TIERS */}
-        <ul className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {TIERS.map((tier) => (
-            <li
-              key={tier.name}
-              className="flex h-full flex-col border border-emerald-950/15 bg-ivory p-6 md:p-7"
-            >
-              <div className="flex items-center justify-between">
-                <span className="text-emerald-950">{tier.icon}</span>
-                <span className="label-caps text-emerald-950/55">
-                  {tier.name}
-                </span>
-              </div>
+        {/* Mobile-only nudge */}
+        <div className="mt-8 flex items-start gap-3 rounded-2xl border border-emerald-950/15 bg-emerald-50/40 p-4 lg:hidden">
+          <div className="text-xs leading-relaxed text-emerald-950/80">
+            <span className="font-semibold text-emerald-950">
+              Best built on a laptop.
+            </span>{" "}
+            On phone the running total lives just below the form. Tap a
+            toggle, then scroll down a little to see your estimate update.
+          </div>
+        </div>
 
-              <div className="mt-6">
-                <div className="flex items-baseline gap-2">
-                  <span className="label-caps text-emerald-950/55">From</span>
-                  <span className="font-display text-3xl text-emerald-950 tabular-nums md:text-4xl">
-                    {peso(tier.starting)}
-                  </span>
-                </div>
-                <p className="mt-3 text-sm leading-relaxed text-emerald-950/75">
-                  {tier.blurb}
-                </p>
-              </div>
-
-              <ul className="mt-6 space-y-2 border-t border-emerald-950/15 pt-5">
-                {tier.bullets.map((b) => (
-                  <li
-                    key={b}
-                    className="flex items-start gap-2 text-sm text-emerald-950/85"
-                  >
-                    <Check
-                      className="mt-0.5 h-4 w-4 shrink-0 text-gold-600"
-                      aria-hidden="true"
-                    />
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
+        <div className="mt-12">
+          <RateCalculator />
+        </div>
 
         {/* PER-MINUTE BREAKDOWN */}
-        <div className="mt-20 grid grid-cols-1 gap-x-12 gap-y-12 lg:grid-cols-12">
+        <div className="mt-24 grid grid-cols-1 gap-x-12 gap-y-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <div className="flex items-baseline gap-x-5 border-b border-emerald-950/15 pb-3">
               <span className="font-display text-2xl italic leading-none text-gold-500">
@@ -160,9 +78,9 @@ export default function Rates() {
               </span>
             </div>
             <p className="mt-6 text-sm leading-relaxed text-emerald-950/75">
-              For projects that don&rsquo;t fit a tier, I quote per-minute of
-              raw footage with element-by-element complexity tiers — same model
-              the intake form uses.
+              The numbers behind the calculator. Edit the constants in one
+              place and the calculator, intake form, and service contract all
+              follow.
             </p>
             <dl className="mt-6 grid grid-cols-1 gap-y-3 sm:grid-cols-2 sm:gap-x-8">
               <div className="flex items-baseline justify-between border-b border-emerald-950/10 py-2">
@@ -252,7 +170,7 @@ export default function Rates() {
                   className="mt-0.5 h-4 w-4 shrink-0 text-gold-600"
                   aria-hidden="true"
                 />
-                <span>4–7 videos per month</span>
+                <span>4 to 7 videos per month</span>
               </li>
               <li className="flex items-start gap-2">
                 <Check
@@ -395,9 +313,12 @@ export default function Rates() {
           </ul>
 
           <p className="mt-6 max-w-3xl text-xs leading-relaxed text-emerald-950/70">
-            These four are starting points — counter-offers are welcome. Send
-            your brief from the intake form below and we&rsquo;ll work out the
-            right tier together.
+            These four are starting points. Counter-offers welcome. Use the{" "}
+            <span className="font-semibold text-emerald-950">
+              Discount request
+            </span>{" "}
+            field in the calculator above to pick a tier and write your own
+            reason.
           </p>
         </div>
 
@@ -431,7 +352,7 @@ export default function Rates() {
                   Tell me about the project
                 </h3>
                 <p className="text-sm leading-relaxed text-emerald-950/75">
-                  Fill in what you know — the rest we cover on a discovery
+                  Fill in what you know. The rest we cover on a discovery
                   call. This is the brief I quote against.
                 </p>
                 <span className="mt-auto inline-flex items-center gap-2 border-t border-emerald-950/15 pt-3 font-serif text-xs text-emerald-950/70">
@@ -462,8 +383,8 @@ export default function Rates() {
                   Once we&rsquo;re a go
                 </h3>
                 <p className="text-sm leading-relaxed text-emerald-950/75">
-                  Editor / client, scope, timeline, fees, revisions, and
-                  ownership — everything in one signable Word doc.
+                  Editor, client, scope, timeline, fees, revisions, and
+                  ownership. Everything in one signable Word doc.
                 </p>
                 <span className="mt-auto inline-flex items-center gap-2 border-t border-emerald-950/15 pt-3 font-serif text-xs text-emerald-950/70">
                   <FileText

@@ -1,4 +1,4 @@
-# Audrey Baliao — Personal Portfolio
+# Audrey Baliao: Personal Portfolio
 
 A static, single-page editorial portfolio for Audrey "Dhey" Baliao.
 Working student. Daily-life storyteller. Travel-dreamer. Video editor for hire.
@@ -6,7 +6,7 @@ Working student. Daily-life storyteller. Travel-dreamer. Video editor for hire.
 ## Stack
 
 - **Next.js 15+** (App Router) + **React 19** + **TypeScript 5**
-- **Tailwind CSS 3.4** (classic JS config — not v4)
+- **Tailwind CSS 3.4** (classic JS config: not v4)
 - **lucide-react** for icons
 - **Google Fonts** via `next/font`: Italianno, Merriweather, Sofia Sans
 - No CMS, no database. All site content lives in TSX.
@@ -64,13 +64,13 @@ This site ships with the same operational artifacts as the sister site
 
 The audit script runs two tracks:
 
-**Security** — blocks deploy on any failure:
+**Security**: blocks deploy on any failure:
 - Committed GitHub Personal Access Tokens (PDF-aware, via `_check_pat.py`)
 - Committed `.env` files
 - `npm audit` critical/high vulnerabilities (moderate/low → warning)
 - `dangerouslySetInnerHTML`, `eval()`, or `new Function()` in source
 
-**Quality** (grammar / a11y / leftovers — warnings only):
+**Quality** (grammar / a11y / leftovers: warnings only):
 - Em-dashes in JSX (the AI-writing tell)
 - `<img>` / `<Image>` tags missing `alt=`
 - Stray `console.log` / `console.warn` / `console.error`
@@ -81,7 +81,7 @@ The audit script runs two tracks:
 | What | Where | Note |
 | --- | --- | --- |
 | Portrait photo | `/public/audrey-portrait.png` | Then uncomment the `<img>` in [src/components/sections/About.tsx](src/components/sections/About.tsx) |
-| Story thumbnails (override) | `/public/stories/*.jpg` | Optional — YouTube cards auto-resolve via `i.ytimg.com`. See [public/stories/README.md](public/stories/README.md) |
+| Story thumbnails (override) | `/public/stories/*.jpg` | Optional: YouTube cards auto-resolve via `i.ytimg.com`. See [public/stories/README.md](public/stories/README.md) |
 
 ## Adjusting rates
 
@@ -104,13 +104,13 @@ python3 scripts/generate-manuals.py
 
 ## Adding a new Story
 
-[src/components/sections/Stories.tsx](src/components/sections/Stories.tsx) — append to `FEATURED` for hero treatment or `VLOGS` for the gallery. YouTube thumbnails resolve automatically from the `videoId`.
+[src/components/sections/Stories.tsx](src/components/sections/Stories.tsx): append to `FEATURED` for hero treatment or `VLOGS` for the gallery. YouTube thumbnails resolve automatically from the `videoId`.
 
 ## Swapping Sofia Sans → real Sofia Pro
 
 In [src/app/layout.tsx](src/app/layout.tsx), replace the `Sofia_Sans`
 import with a `next/font/local` loader pointing at your hosted Sofia
-Pro `.woff2` files. Keep `variable: "--font-sans"` — nothing else
+Pro `.woff2` files. Keep `variable: "--font-sans"`: nothing else
 needs to change anywhere in the codebase.
 
 ## Credits

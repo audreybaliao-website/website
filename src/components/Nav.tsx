@@ -11,10 +11,8 @@ type NavItem = {
 const ITEMS: readonly NavItem[] = [
   { numeral: "I", label: "Hello", id: "about" },
   { numeral: "II", label: "Stories", id: "stories" },
-  { numeral: "III", label: "Dreams", id: "dreams" },
-  { numeral: "IV", label: "Travel", id: "travel" },
-  { numeral: "V", label: "Rates", id: "rates" },
-  { numeral: "VI", label: "Connect", id: "connect" },
+  { numeral: "III", label: "Rates", id: "rates" },
+  { numeral: "IV", label: "Connect", id: "connect" },
 ] as const;
 
 export default function Nav() {
@@ -38,7 +36,7 @@ export default function Nav() {
         }
       },
       {
-        // Mid-viewport band — section becomes "active" once its top crosses
+        // Mid-viewport band: section becomes "active" once its top crosses
         // 25% from the top.
         rootMargin: "-25% 0px -65% 0px",
         threshold: 0,
@@ -55,7 +53,7 @@ export default function Nav() {
         <a
           href="#about"
           className="flex items-baseline gap-2 text-emerald-950 transition hover:opacity-80"
-          aria-label="Audrey Baliao — back to top"
+          aria-label="Audrey Baliao, back to top"
         >
           <span className="font-serif text-base font-bold tracking-tight">
             Audrey

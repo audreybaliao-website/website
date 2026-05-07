@@ -18,7 +18,7 @@ export default function NotFound() {
         </h1>
 
         <p className="mt-8 max-w-xl text-base leading-relaxed text-emerald-950/75">
-          Maybe a future stamp, maybe a typo. Either way — let's get you back
+          Maybe a future stamp, maybe a typo. Either way, let&rsquo;s get you back
           on the map.
         </p>
 

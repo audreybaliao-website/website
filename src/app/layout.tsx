@@ -23,7 +23,7 @@ const merriweather = Merriweather({
 
 // --font-sans → Sofia Sans (placeholder for paid Sofia Pro).
 // To swap to real Sofia Pro: replace this import with your hosted Sofia Pro
-// loader (e.g. localFont) and keep `variable: "--font-sans"` — nothing else
+// loader (e.g. localFont) and keep `variable: "--font-sans"`. Nothing else
 // in the codebase needs to change.
 const sofiaSans = Sofia_Sans({
   subsets: ["latin"],
@@ -35,7 +35,7 @@ const sofiaSans = Sofia_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL("https://audreybaliao.com"),
   title: {
-    default: "Audrey Baliao — Stories, dreams, everyday moments",
+    default: "Audrey Baliao · Stories, dreams, everyday moments",
     template: "%s · Audrey Baliao",
   },
   description:
@@ -56,14 +56,14 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     type: "website",
-    title: "Audrey Baliao — Stories, dreams, everyday moments",
+    title: "Audrey Baliao · Stories, dreams, everyday moments",
     description:
       "Working student. Daily-life storyteller. Travel-dreamer. Turning ordinary moments into stories worth keeping.",
     siteName: "Audrey Baliao",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Audrey Baliao — Stories, dreams, everyday moments",
+    title: "Audrey Baliao · Stories, dreams, everyday moments",
     description:
       "Working student. Daily-life storyteller. Travel-dreamer.",
   },

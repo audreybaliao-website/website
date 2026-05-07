@@ -7,7 +7,7 @@ type Social = {
   icon: React.ReactNode;
 };
 
-// Inline TikTok glyph — lucide doesn't ship one, so we draw a tiny SVG that
+// Inline TikTok glyph. Lucide doesn't ship one, so we draw a tiny SVG that
 // matches the stroke weight of Instagram/Facebook icons.
 const TikTokIcon = ({ className }: { className?: string }) => (
   <svg
@@ -65,7 +65,7 @@ export default function Connect() {
       <div className="mx-auto max-w-7xl">
         <div className="eyebrow">
           <span className="eyebrow__numeral" aria-hidden="true">
-            VI
+            IV
           </span>
           <span className="eyebrow__label">Connect</span>
           <span className="eyebrow__meta">Replies fastest on Instagram</span>
@@ -78,12 +78,11 @@ export default function Connect() {
           </h2>
           <p className="mt-8 max-w-2xl text-base leading-relaxed text-emerald-950/75 md:text-lg">
             Collabs, hellos, &ldquo;I think you&rsquo;d love this place&rdquo;
-            notes &mdash; all welcome. The DMs are open and the camera is
-            charged.
+            notes. All welcome. The DMs are open and the camera is charged.
           </p>
         </div>
 
-        {/* EMAIL — primary CTA for hiring inquiries */}
+        {/* EMAIL: primary CTA for hiring inquiries */}
         <div className="mt-14 border border-emerald-950/15 bg-emerald-50/40 p-6 md:p-8">
           <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <div className="flex items-start gap-4">
@@ -129,7 +128,7 @@ export default function Connect() {
           </div>
         </div>
 
-        {/* SOCIALS — for casual hellos */}
+        {/* SOCIALS: for casual hellos */}
         <div className="mt-12">
           <div className="flex items-baseline gap-x-5 border-b border-emerald-950/15 pb-3">
             <span className="font-display text-2xl italic leading-none text-gold-500">

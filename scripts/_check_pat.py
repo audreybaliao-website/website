@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Helper for scripts/audit — scans every tracked file for a GitHub
+"""Helper for scripts/audit: scans every tracked file for a GitHub
 Personal Access Token. Reads file paths from stdin (one per line), prints
 matching paths to stdout. PDF files are decoded via pypdf because their
 text streams are zlib-compressed and invisible to plain grep/strings."""

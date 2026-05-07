@@ -66,7 +66,7 @@ OUTPUT = DOCS / "Audrey Baliao Portfolio - Manual.pdf"
 
 
 # ---------------------------------------------------------------------------
-# Project introspection — pull live values from the repo so the manual stays
+# Project introspection: pull live values from the repo so the manual stays
 # accurate without manual editing.
 # ---------------------------------------------------------------------------
 def read_package_json() -> dict:
@@ -155,7 +155,7 @@ def parse_audit_log() -> dict:
     }
 
 
-# Plain-English translations for warning codes — used in the User Manual so
+# Plain-English translations for warning codes: used in the User Manual so
 # a non-technical reader understands what each finding means. Codes that
 # aren't in this map fall back to the raw audit message.
 WARNING_TRANSLATIONS: dict[str, str] = {
@@ -163,15 +163,15 @@ WARNING_TRANSLATIONS: dict[str, str] = {
     "missing-alt": "An image is missing its text label (alt text), which screen readers and search engines need.",
     "console-leftover": "Debug logging (console messages) was left in the site code.",
     "todo-marker": "A 'to-do' or 'fix-me' note was left in the code.",
-    "npm-audit": "One of the libraries the site uses has a known weak spot — usually fixable by running an update.",
-    "pat-leak": "A secret access token is committed to the repository — it must be rotated immediately.",
+    "npm-audit": "One of the libraries the site uses has a known weak spot: usually fixable by running an update.",
+    "pat-leak": "A secret access token is committed to the repository: it must be rotated immediately.",
     "env-committed": "A configuration file (.env) was committed; it may contain sensitive values.",
     "dangerous-api": "Code uses a function that's a known security risk if used carelessly.",
 }
 
 
 def git_remote_credentials() -> dict:
-    """Extract username and repo path from .git/config remote URL — but
+    """Extract username and repo path from .git/config remote URL: but
     never the embedded PAT. The PAT lives only in .git/config (which is
     not tracked) and must never be written into the manual PDF, since the
     PDF is committed and would expose it to anyone with repo access."""
@@ -199,7 +199,7 @@ def git_remote_credentials() -> dict:
 
 
 # ---------------------------------------------------------------------------
-# PDF styling — emerald + gold palette to match the website.
+# PDF styling: emerald + gold palette to match the website.
 # ---------------------------------------------------------------------------
 EMERALD_950 = colors.HexColor("#0a2418")
 EMERALD_800 = colors.HexColor("#174d33")
@@ -325,7 +325,7 @@ def make_styles() -> dict[str, ParagraphStyle]:
 
 
 # ---------------------------------------------------------------------------
-# Page chrome — header + footer with page numbers.
+# Page chrome: header + footer with page numbers.
 # ---------------------------------------------------------------------------
 def page_chrome(canvas, doc):
     canvas.saveState()
@@ -333,7 +333,7 @@ def page_chrome(canvas, doc):
     canvas.setFillColor(MUTED)
     # Footer
     canvas.drawString(
-        0.75 * inch, 0.5 * inch, "Audrey Baliao — Personal Portfolio"
+        0.75 * inch, 0.5 * inch, "Audrey Baliao: Personal Portfolio"
     )
     canvas.drawRightString(
         letter[0] - 0.75 * inch, 0.5 * inch, f"Page {doc.page}"
@@ -439,7 +439,7 @@ def build():
     if commit["hash"] != "(no git history)":
         story.append(
             p(
-                f"Reflecting commit <b>{commit['hash']}</b> &mdash; "
+                f"Reflecting commit <b>{commit['hash']}</b> , "
                 f"&ldquo;{commit['subject']}&rdquo; ({commit['date']}).",
                 s["Note"],
             )
@@ -460,23 +460,23 @@ def build():
     story.append(Spacer(1, 0.4 * inch))
     story.append(p("Contents", s["H2"]))
     toc_items = [
-        "Part 1 — User Manual",
+        "Part 1: User Manual",
         "  1.1  What this website is",
         "  1.2  Where to find it",
-        "  1.3  The six sections, page by page",
-        "  1.4  How a client books an edit",
-        "  1.5  Receiving an inquiry",
+        "  1.3  The four sections, page by page",
+        "  1.4  How a client builds a quote",
+        "  1.5  Receiving an inquiry email",
         "  1.6  Asking for changes",
         "  1.7  Common questions",
         "  1.8  Latest QA results",
         "",
-        "Part 2 — Technical Manual",
+        "Part 2: Technical Manual",
         "  2.1  Stack overview",
         "  2.2  Project file structure",
         "  2.3  Running locally",
         "  2.4  Where each piece of content lives",
         "  2.5  The pricing engine",
-        "  2.6  The Stories feed",
+        "  2.6  The brief builder",
         "  2.7  Deployment pipeline",
         "  2.8  Credentials",
         "  2.9  Asset and image handling",
@@ -490,9 +490,9 @@ def build():
     story.append(PageBreak())
 
     # =====================================================================
-    # PART 1 — USER MANUAL
+    # PART 1: USER MANUAL
     # =====================================================================
-    story.append(p("Part 1 &mdash; User Manual", s["PartTitle"]))
+    story.append(p("Part 1 , User Manual", s["PartTitle"]))
     story.append(
         p(
             "This part is written for Audrey and anyone helping her run the "
@@ -508,7 +508,7 @@ def build():
     story.append(
         p(
             "A one-page editorial portfolio for Audrey &ldquo;Dhey&rdquo; "
-            "Baliao &mdash; working student, daily-life storyteller, and "
+            "Baliao , working student, daily-life storyteller, and "
             "video editor based in the Philippines. It does three things:",
             s["Body"],
         )
@@ -516,14 +516,15 @@ def build():
     story.extend(
         bullets(
             [
-                "<b>Tells her story</b> &mdash; bio, mission and vision, "
-                "dreams (travel, flight attendant or cruise ship), and a "
-                "travel wishlist.",
-                "<b>Showcases her work</b> &mdash; a featured row "
-                "(music-video edit + news/project edit) plus a 7-card vlog "
-                "gallery, all linking out to YouTube and Facebook.",
-                "<b>Lets clients hire her</b> &mdash; a static rate sheet "
-                "with per-project starting prices, a per-minute breakdown, "
+                "<b>Tells her story.</b> A bio that folds in her dreams "
+                "(travel everywhere; flight attendant or cruise ship; "
+                "turn it all into content) without separate &lsquo;dreams&rsquo; "
+                "or &lsquo;travel&rsquo; sections.",
+                "<b>Showcases her work.</b> A 7-card vlog gallery, all on "
+                "YouTube. Thumbnails come from i.ytimg.com automatically.",
+                "<b>Lets clients self-quote.</b> A live rate calculator "
+                "that builds a complete project brief and emails it to "
+                "Audrey with one click. Plus a per-minute breakdown, "
                 "monthly retainer plans, a discount ladder, and "
                 "downloadable intake form + service contract.",
             ],
@@ -556,7 +557,7 @@ def build():
     )
 
     # 1.3
-    story.append(p("1.3  The six sections, page by page", s["H2"]))
+    story.append(p("1.3  The four sections, page by page", s["H2"]))
 
     story.append(p("I. Hello (the hero)", s["H3"]))
     story.append(
@@ -564,8 +565,13 @@ def build():
             "The first thing visitors see. Includes a "
             "&ldquo;Currently creating&rdquo; pulsing dot, the headline "
             "&ldquo;Everyday moments, turned into stories,&rdquo; a portrait "
-            "frame, role / based / on-platform meta, two paragraphs of bio, "
-            "and a <i>Mission / Vision</i> pair.",
+            "frame, a role / based / on-platform meta strip, and three "
+            "paragraphs of bio. The bio absorbs what used to be separate "
+            "&lsquo;Dreams&rsquo; and &lsquo;Travel&rsquo; sections: who "
+            "Audrey is, what formats she edits (vlogs, travel wishlist "
+            "edits, GRWMs, music videos, news pieces), and the bigger "
+            "dream of travelling everywhere as a flight attendant or aboard "
+            "a cruise ship.",
             s["Body"],
         )
     )
@@ -573,62 +579,29 @@ def build():
     story.append(p("II. Stories", s["H3"]))
     story.append(
         p(
-            "The work feed, split into three blocks:",
+            "A 3-column gallery of 7 vlog edits, all on YouTube. "
+            "Thumbnails come from <i>i.ytimg.com</i> automatically. Each "
+            "card opens the actual video in a new tab.",
             s["Body"],
         )
     )
-    story.extend(
-        bullets(
-            [
-                "<b>Featured edits</b> &mdash; 2 cards: one music-video "
-                "edit (YouTube) and one news/project edit (Facebook).",
-                "<b>Vlog edits</b> &mdash; a 3-column gallery of 7 vlog "
-                "edits, all on YouTube. Thumbnails come from i.ytimg.com "
-                "automatically.",
-                "<b>I also edit</b> &mdash; a 6-format list (vlog, news, "
-                "music video, cinematic, travel, photo dump).",
-            ],
-            s["Bullet"],
-        )
-    )
 
-    story.append(p("III. Dreams &amp; Goals", s["H3"]))
+    story.append(p("III. Rate sheet", s["H3"]))
     story.append(
         p(
-            "Three numbered steps: <i>01 Travel everywhere</i>, <i>02 Wings "
-            "or waves</i> (the gold-bordered duo card &mdash; flight "
-            "attendant vs. cruise ship), <i>03 Turn it all into "
-            "content</i>.",
+            "Four blocks. <i>Live rate calculator</i>: clients toggle what "
+            "they need and see a running PHP total, then send the brief by "
+            "email, Gmail, or copy-paste. <i>Per-minute build</i>: clean "
+            "cuts, intro / outro, thumbnail, cover frame, YouTube kit, "
+            "extra exports, and the rush surcharge. <i>Monthly retainer</i>: "
+            "4 to 7 videos per month with a 50/50 payment table. "
+            "<i>Discounts</i>: 5 / 10 / 15 / 20% ladder. Plus two document "
+            "downloads (intake form, service contract).",
             s["Body"],
         )
     )
 
-    story.append(p("IV. Travel Map", s["H3"]))
-    story.append(
-        p(
-            "Six rotated passport-stamp cards (Tokyo, Paris, Santorini, "
-            "Maldives, Iceland, Bali) with gold seals, paired with an "
-            "editorial wishlist on the right and a press-kit download.",
-            s["Body"],
-        )
-    )
-
-    story.append(p("V. Rate sheet", s["H3"]))
-    story.append(
-        p(
-            "Three blocks. <i>Per-project tiers</i>: vlog edit, music video "
-            "edit, news/project edit, each with starting prices and "
-            "included items. <i>Per-minute build</i>: clean cuts, intro / "
-            "outro, thumbnail, cover frame, YouTube kit, extra exports, "
-            "and the rush surcharge. <i>Monthly retainer</i>: 4 to 7 "
-            "videos per month with a 50/50 payment table. <i>Discounts</i>: "
-            "5 / 10 / 15 / 20% ladder. Plus two document downloads "
-            "(intake form, service contract).",
-            s["Body"],
-        )
-    )
-
-    story.append(p("VI. Connect", s["H3"]))
+    story.append(p("IV. Connect", s["H3"]))
     story.append(
         p(
             "Headline (&ldquo;Let&rsquo;s tell a story together&rdquo;), a "
@@ -645,70 +618,129 @@ def build():
     )
 
     # 1.4
-    story.append(p("1.4  How a client books an edit", s["H2"]))
+    story.append(p("1.4  How a client builds a quote", s["H2"]))
     story.append(
         p(
-            "Audrey&rsquo;s site doesn&rsquo;t use a live calculator. The "
-            "booking flow is intentionally simple:",
+            "Inside Section <b>III (Rate sheet)</b> the client sees a live "
+            "calculator at the top of the section. They see:",
             s["Body"],
         )
     )
     story.extend(
         bullets(
             [
-                "Client lands on Section <b>V (Rate sheet)</b> and reads "
-                "the per-project starting prices, retainer table, and "
-                "discount ladder.",
-                "Client downloads <b>audrey-baliao-intake-form.docx</b> "
-                "from the &ldquo;Documents&rdquo; block at the bottom of "
-                "Section V.",
-                "Client fills it in and sends it back via the channel of "
-                "their choice (Instagram DM @ur.dhey is fastest).",
-                "Audrey reviews the brief, quotes against it, and, when "
-                "it&rsquo;s a go, sends back "
-                "<b>audrey-baliao-service-contract.docx</b> for signature.",
-                "50% prepayment locks the slot; the remaining 50% is due "
-                "before the midpoint (or full delivery for one-off "
-                "projects).",
+                "A &ldquo;Tell me about you and your project&rdquo; card with "
+                "their name, email, a project description (multi-line), and "
+                "a Google Drive link to their footage.",
+                "<b>Start from a preset.</b> Quick reel, 10-min vlog, Music "
+                "video, or News / project edit. One click pre-fills "
+                "everything.",
+                "<b>Footage.</b> Raw video length in minutes.",
+                "<b>Edit complexity.</b> Toggle music, video effects, and "
+                "captions. Each has four levels: Light, Standard, Detailed, "
+                "Heavy.",
+                "<b>Hooks &amp; branding.</b> Cliffhanger, custom "
+                "intro/outro, thumbnail, cover frame, and the YouTube kit "
+                "(timestamps + title + description, &#8369;100 all-in).",
+                "<b>Delivery.</b> Extra exports count and rush toggle.",
+                "<b>Add-ons.</b> Optional flat fees for script/structure "
+                "pass and stock asset budget.",
+                "<b>Discount request</b> (optional). A 0/5/10/15/20% "
+                "starting tier the client can propose with their reason.",
             ],
             s["Bullet"],
+        )
+    )
+    story.append(
+        p(
+            "On the right side (or below on mobile), a sticky <b>Your "
+            "estimate</b> card shows the running PHP total, included items, "
+            "the timeline, and three send buttons:",
+            s["Body"],
+        )
+    )
+    story.extend(
+        bullets(
+            [
+                "<b>Send this brief to Audrey.</b> Opens the client&rsquo;s "
+                "default mail app with the full brief prefilled.",
+                "<b>Open in Gmail.</b> Works for clients who use Gmail in "
+                "a browser without a default mail handler set up.",
+                "<b>Copy brief.</b> Clipboard copy with a green &ldquo;"
+                "Copied&rdquo; flash; client can paste into any mail "
+                "client.",
+            ],
+            s["Bullet"],
+        )
+    )
+    story.append(
+        p(
+            "If the client prefers, the same intake form is downloadable "
+            "as a Word document at the bottom of Section III.",
+            s["Body"],
         )
     )
 
     # 1.5
-    story.append(p("1.5  Receiving an inquiry", s["H2"]))
+    story.append(p("1.5  Receiving an inquiry email", s["H2"]))
     story.append(
         p(
-            "Inquiries arrive on whichever channel the client uses. The "
-            "site directs them at three:",
+            "When a client clicks any of the three send buttons in the "
+            "calculator, <b>audreybaliao022@gmail.com</b> receives a message "
+            "that looks like this:",
             s["Body"],
         )
     )
-    story.extend(
-        bullets(
-            [
-                "<b>Email</b> &mdash; <i>audreybaliao022@gmail.com</i>. "
-                "The right channel for paid projects and bookings; the "
-                "&ldquo;Email Audrey&rdquo; and &ldquo;Open in Gmail&rdquo; "
-                "buttons in Section VI both prefill the subject as "
-                "&ldquo;Project inquiry.&rdquo;",
-                "<b>Instagram DM</b> &mdash; @ur.dhey. The site notes "
-                "&ldquo;replies fastest on Instagram.&rdquo; Best for "
-                "casual hellos and quick questions.",
-                "<b>Facebook Messenger</b> &mdash; audrey.baliao.2024.",
-                "<b>TikTok DM</b> &mdash; @.dtb8 (personal) and "
-                "@adryrzbl (edits). Use as a fallback.",
-            ],
-            s["Bullet"],
+    sample_brief = """\
+Subject: Project inquiry from Maria Santos
+
+Hi Audrey, I'm Maria.
+
+I'd love to book a project with you. Here are the choices I made on
+your site:
+
+  * Raw footage length: 30 minutes
+  * Music & sound design: Yes (Standard)
+  * Video effects: Yes (Detailed)
+  * Subtitles / captions: Yes (Heavy)
+  * Cliffhanger opener: No
+  * Custom intro: Yes
+  * Custom outro: Yes
+  * Thumbnail: Yes
+  * Cover frame: No
+  * Extra export versions: 2
+  * Delivery: Standard (7-day)
+
+Estimated total: PHP 4,025
+
+A little about the project:
+A wedding highlight reel for my parents' anniversary, posting on YouTube.
+I'd like a warm cinematic feel.
+
+Footage on Google Drive: https://drive.google.com/...
+(I have set the link to "Anyone with the link can view" so you can
+open it without delays.)
+
+Thank you, and I look forward to your reply.
+
+Maria Santos
+maria@example.com"""
+    story.append(code_block(sample_brief, s["Code"]))
+    story.append(
+        p(
+            "The brief always includes whatever the client typed into the "
+            "calculator. Reply directly to that email; the client&rsquo;s "
+            "address is on the &ldquo;From&rdquo; line, with their typed "
+            "address as a backup at the bottom.",
+            s["Body"],
         )
     )
     story.append(
         p(
-            "When an inquiry comes in, the standard reply pattern is: "
-            "(1) thank them, (2) link the intake form, (3) ask which "
-            "platform the edit is for, and (4) ask for the raw footage "
-            "Drive link with sharing set to <i>Anyone with the link can "
-            "view</i>.",
+            "The site also links four casual channels under "
+            "&ldquo;Or come say hi&rdquo; in Section IV: Instagram "
+            "(@ur.dhey, fastest replies), Facebook (audrey.baliao.2024), "
+            "and the two TikTok handles (@.dtb8 personal, @adryrzbl edits).",
             s["Body"],
         )
     )
@@ -777,7 +809,7 @@ def build():
         ),
         (
             "Where does the YouTube thumbnail come from?",
-            "It&rsquo;s pulled from <i>i.ytimg.com</i> at runtime &mdash; "
+            "It&rsquo;s pulled from <i>i.ytimg.com</i> at runtime , "
             "the videoId is the only thing stored in the codebase. No "
             "thumbnail files are uploaded to the repo for YouTube videos.",
         ),
@@ -809,7 +841,7 @@ def build():
             verdict = (
                 "&#9989;  <b>Safe to ship, with a few small warnings.</b> "
                 "The most recent automated check found some non-blocking "
-                "items worth reviewing &mdash; listed below."
+                "items worth reviewing , listed below."
             )
         elif audit["status"] == "failed":
             verdict = (
@@ -826,7 +858,7 @@ def build():
             )
         story.append(p(verdict, s["Body"]))
 
-        # Collect translated, deduplicated warnings — capped at 10.
+        # Collect translated, deduplicated warnings: capped at 10.
         seen: set[str] = set()
         translated: list[str] = []
         for f in audit["findings"]:
@@ -849,7 +881,7 @@ def build():
             if extras > 0:
                 story.append(
                     p(
-                        f"<i>Plus {extras} more category(ies) &mdash; see "
+                        f"<i>Plus {extras} more category(ies) , see "
                         f"the full log in the Technical Manual.</i>",
                         s["Note"],
                     )
@@ -858,9 +890,9 @@ def build():
     story.append(PageBreak())
 
     # =====================================================================
-    # PART 2 — TECHNICAL MANUAL
+    # PART 2: TECHNICAL MANUAL
     # =====================================================================
-    story.append(p("Part 2 &mdash; Technical Manual", s["PartTitle"]))
+    story.append(p("Part 2 , Technical Manual", s["PartTitle"]))
     story.append(
         p(
             "Written for the developer maintaining this codebase. Includes "
@@ -886,11 +918,11 @@ def build():
     story.append(
         p(
             "All app routes live under the App Router (<i>src/app/</i>). "
-            "Pages are React Server Components by default; the only "
-            "client-side component is the navigation (<i>Nav.tsx</i>) for "
-            "scrollspy. No backend, no database, no API routes &mdash; "
-            "inquiries land via Instagram / Facebook / TikTok DMs and the "
-            "intake form is a downloadable Word document.",
+            "Pages are React Server Components by default; the client-side "
+            "components are the navigation (<i>Nav.tsx</i>) for scrollspy "
+            "and the rate calculator (<i>RateCalculator.tsx</i>). No "
+            "backend, no database, no API routes. The calculator builds a "
+            "<i>mailto:</i> URL that the client&rsquo;s mail app handles.",
             s["Body"],
         )
     )
@@ -924,15 +956,14 @@ audrey-baliao-portfolio/
 │   │   └── sitemap.ts
 │   ├── components/
 │   │   ├── Nav.tsx                            ← sticky header, scrollspy
+│   │   ├── RateCalculator.tsx                 ← live quote builder (client)
 │   │   └── sections/
 │   │       ├── About.tsx                      ← I.   Hello
 │   │       ├── Stories.tsx                    ← II.  Stories
-│   │       ├── Dreams.tsx                     ← III. Dreams & Goals
-│   │       ├── Travel.tsx                     ← IV.  Travel Map
-│   │       ├── Rates.tsx                      ← V.   Rate sheet
-│   │       └── Connect.tsx                    ← VI.  Connect
+│   │       ├── Rates.tsx                      ← III. Rate sheet
+│   │       └── Connect.tsx                    ← IV.  Connect
 │   └── lib/
-│       └── pricing.ts                         ← single source of truth
+│       └── pricing.ts                         ← rates + calculateQuote
 ├── Deploy.command                             ← double-click → deploy
 ├── eslint.config.mjs
 ├── next.config.ts                             ← strict CSP + security headers
@@ -969,32 +1000,14 @@ audrey-baliao-portfolio/
     story.append(p("2.4  Where each piece of content lives", s["H2"]))
     content_table = [
         ("Headline / hero", "src/components/sections/About.tsx"),
-        ("Bio paragraphs", "src/components/sections/About.tsx (story block)"),
+        ("Bio paragraphs (3)", "src/components/sections/About.tsx"),
         (
-            "Mission / Vision pair",
-            "src/components/sections/About.tsx (mission/vision dl)",
-        ),
-        (
-            "Stories — featured edits",
-            "src/components/sections/Stories.tsx (FEATURED array)",
-        ),
-        (
-            "Stories — vlog gallery",
+            "Stories: vlog gallery",
             "src/components/sections/Stories.tsx (VLOGS array)",
         ),
-        (
-            "Stories — formats list",
-            "src/components/sections/Stories.tsx (FORMATS array)",
-        ),
-        (
-            "Dreams numbered steps",
-            "src/components/sections/Dreams.tsx (STEPS array)",
-        ),
-        (
-            "Travel passport stamps",
-            "src/components/sections/Travel.tsx (STAMPS + PICKS)",
-        ),
-        ("Rate tiers (per-project)", "src/components/sections/Rates.tsx (TIERS)"),
+        ("Rate calculator UI", "src/components/RateCalculator.tsx"),
+        ("Calculator presets", "src/components/RateCalculator.tsx (PRESETS)"),
+        ("Email body / brief", "src/components/RateCalculator.tsx (buildBrief)"),
         (
             "Pricing constants",
             "src/lib/pricing.ts (PRICING, RETAINER_PLANS, DISCOUNTS)",
@@ -1013,10 +1026,10 @@ audrey-baliao-portfolio/
     story.append(p("2.5  The pricing engine", s["H2"]))
     story.append(
         p(
-            "All rate logic is in <i>src/lib/pricing.ts</i>. The site uses "
-            "a static rate sheet (no live calculator), but the constants "
-            "are typed and centralized so the intake form, the service "
-            "contract, and the rate-sheet display all stay in lockstep:",
+            "All rate logic is in <i>src/lib/pricing.ts</i>. The constants "
+            "are typed and centralized so the live calculator, the rate "
+            "sheet display, the intake form, and the service contract all "
+            "stay in lockstep:",
             s["Body"],
         )
     )
@@ -1028,65 +1041,81 @@ audrey-baliao-portfolio/
             story.append(code_block(m.group(0), s["Code"]))
     story.append(
         p(
-            "<b>How a quote is computed</b> (mirrors the intake form):",
+            "<b>How a quote is computed</b> (function "
+            "<i>calculateQuote</i>):",
             s["Body"],
         )
     )
     story.extend(
         bullets(
             [
-                "<b>Clean cuts</b> &mdash; rawMinutes &times; baseRatePerMin "
+                "<b>Clean cuts.</b> rawMinutes &times; baseRatePerMin "
                 "(&#8369;20/min). Always charged.",
-                "<b>Music / Effects / Captions</b> &mdash; each: rawMinutes "
+                "<b>Music / Effects / Captions.</b> Each: rawMinutes "
                 "&times; complexity &times; baseRatePerMin. Complexity is "
                 "0.3 (Light), 0.5 (Standard), 0.7 (Detailed), or 1.0 "
                 "(Heavy).",
-                "<b>Cliffhanger opener</b> &mdash; rawMinutes &times; 0.5 "
+                "<b>Cliffhanger opener.</b> rawMinutes &times; 0.5 "
                 "&times; baseRatePerMin.",
-                "<b>Flat fees</b> &mdash; intro &#8369;250, outro "
+                "<b>Flat fees.</b> Intro &#8369;250, outro "
                 "&#8369;250, thumbnail &#8369;250, cover frame "
                 "&#8369;250, YouTube kit &#8369;100 (timestamps + title + "
                 "description, all-in).",
-                "<b>Extra exports</b> &mdash; &#8369;100 each.",
-                "<b>Rush</b> &mdash; subtotal &times; 0.25 surcharge added "
-                "to the running total.",
-                "<b>Retainer</b> &mdash; &#8369;2,500 per video, 4 to 7 "
-                "videos / month, 50/50 split.",
+                "<b>Extra exports.</b> &#8369;100 each.",
+                "<b>Rush.</b> Subtotal &times; 0.25 surcharge added to the "
+                "running total.",
+                "<b>Add-ons.</b> Script / structure pass and stock-asset "
+                "budget are added at face value (client-entered amounts).",
+                "<b>Retainer.</b> &#8369;2,500 per video, 4 to 7 videos / "
+                "month, 50/50 split.",
             ],
             s["Bullet"],
         )
     )
 
     # 2.6
-    story.append(p("2.6  The Stories feed", s["H2"]))
+    story.append(p("2.6  The brief builder", s["H2"]))
     story.append(
         p(
-            "Stories has three layered blocks driven by typed arrays in "
-            "<i>src/components/sections/Stories.tsx</i>:",
+            "<i>buildBrief()</i> at the bottom of "
+            "<i>RateCalculator.tsx</i> turns the calculator state into "
+            "plain text. State threaded through:",
             s["Body"],
         )
     )
     story.extend(
         bullets(
             [
-                "<b>FEATURED</b> &mdash; 2 hero cards in a 2-column grid. "
-                "Currently: one music-video edit (YouTube) + one news/project "
-                "edit (Facebook).",
-                "<b>VLOGS</b> &mdash; 7 compact cards in a 3-column grid. "
-                "All YouTube. Thumbnails resolve to "
-                "<i>https://i.ytimg.com/vi/&lt;ID&gt;/hqdefault.jpg</i> "
-                "automatically.",
-                "<b>FORMATS</b> &mdash; a static 6-item list (vlog, news, "
-                "music video, cinematic, travel, photo dump).",
+                "<i>clientName</i>, <i>clientEmail</i>: greeting + sign-off.",
+                "<i>projectDescription</i>: the &ldquo;A little about the "
+                "project&rdquo; block.",
+                "<i>driveLink</i>: the <i>Footage on Google Drive</i> line "
+                "(with a built-in note about share settings).",
+                "Every calculator toggle/level: rendered as Yes/No with "
+                "the complexity label.",
+                "<i>quote.total</i>: <i>Estimated total</i> in PHP.",
+                "<i>discountTier</i> + <i>discountReason</i>: only emitted "
+                "when the client picked a tier.",
             ],
             s["Bullet"],
         )
     )
     story.append(
         p(
-            "Adding an edit takes one append to the right array. Facebook "
-            "shares don&rsquo;t expose a public thumbnail, so those cards "
-            "fall back to a branded gradient placeholder.",
+            "All three send buttons (mailto, Gmail compose URL, Copy "
+            "brief) consume the same <i>briefBody</i> string. The Gmail "
+            "URL uses the <i>view=cm&amp;fs=1</i> compose endpoint with "
+            "URL-encoded subject + body so the client&rsquo;s Gmail tab "
+            "opens with everything filled in.",
+            s["Body"],
+        )
+    )
+    story.append(
+        p(
+            "The Stories feed is a single typed array (<i>VLOGS</i> in "
+            "<i>Stories.tsx</i>) of 7 YouTube vlog cards. Thumbnails "
+            "resolve to <i>https://i.ytimg.com/vi/&lt;ID&gt;/hqdefault.jpg</i> "
+            "from the videoId; no manual upload required.",
             s["Body"],
         )
     )
@@ -1121,7 +1150,7 @@ audrey-baliao-portfolio/
         )
     )
 
-    # 2.8 — credentials
+    # 2.8: credentials
     story.append(p("2.8  Credentials", s["H2"]))
     story.append(
         p(
@@ -1143,7 +1172,7 @@ audrey-baliao-portfolio/
         ("Default branch", "main"),
         (
             "Personal Access Token",
-            "(stored locally in .git/config — never committed; rotate at "
+            "(stored locally in .git/config: never committed; rotate at "
             "github.com/settings/personal-access-tokens)",
         ),
         ("Token scope", "Contents: Read and write (single-repo)"),
@@ -1183,7 +1212,7 @@ audrey-baliao-portfolio/
     story.append(p("2.9  Asset and image handling", s["H2"]))
     story.append(
         p(
-            "<b>Hero portrait</b> &mdash; <i>public/audrey-portrait.png</i>. "
+            "<b>Hero portrait</b> , <i>public/audrey-portrait.png</i>. "
             "Until the file exists, the frame in About.tsx renders a "
             "&ldquo;Dhey&rdquo; script placeholder. Drop the JPG in and "
             "uncomment the <i>&lt;img&gt;</i> block in About.tsx.",
@@ -1192,7 +1221,7 @@ audrey-baliao-portfolio/
     )
     story.append(
         p(
-            "<b>Vlog &amp; featured-edit thumbnails</b> &mdash; resolve "
+            "<b>Vlog &amp; featured-edit thumbnails</b> , resolve "
             "automatically:",
             s["Body"],
         )
@@ -1200,13 +1229,13 @@ audrey-baliao-portfolio/
     story.extend(
         bullets(
             [
-                "<b>YouTube videos</b> &mdash; <i>https://i.ytimg.com/vi/"
+                "<b>YouTube videos</b> , <i>https://i.ytimg.com/vi/"
                 "&lt;ID&gt;/hqdefault.jpg</i>, allowed by the CSP "
                 "<i>img-src</i> in <i>next.config.ts</i>. No upload needed.",
-                "<b>Facebook share/v/</b> &mdash; no public thumbnail "
+                "<b>Facebook share/v/</b> , no public thumbnail "
                 "exists; the card uses an emerald-gradient placeholder "
                 "with a <i>News &middot; project</i> badge.",
-                "<b>Optional override</b> &mdash; drop a JPG into "
+                "<b>Optional override</b> , drop a JPG into "
                 "<i>public/stories/</i> and add a <i>thumb</i> field to "
                 "the matching entry in Stories.tsx.",
             ],
@@ -1256,10 +1285,11 @@ audrey-baliao-portfolio/
     story.append(p("Update the bio", s["H3"]))
     story.append(
         p(
-            "Headline, body paragraphs, and the Mission / Vision pair are "
-            "all in <i>About.tsx</i>. Use <i>&amp;rsquo;</i> for "
-            "apostrophes inside JSX text to avoid React entity warnings, "
-            "e.g. <i>I&amp;rsquo;m</i>.",
+            "The headline and three bio paragraphs are all in "
+            "<i>About.tsx</i>. The third paragraph is where the dreams "
+            "(travel everywhere; flight attendant or cruise ship) live. "
+            "Use <i>&amp;rsquo;</i> for apostrophes inside JSX text to "
+            "avoid React entity warnings, e.g. <i>I&amp;rsquo;m</i>.",
             s["Body"],
         )
     )
@@ -1271,7 +1301,7 @@ audrey-baliao-portfolio/
             "<i>build_intake_form()</i> or <i>build_service_contract()</i> "
             "function. Re-run <i>python3 scripts/generate-forms.py</i> to "
             "regenerate the .docx files in <i>public/</i>. Commit and "
-            "push as usual &mdash; the new versions are served at "
+            "push as usual , the new versions are served at "
             "<i>/audrey-baliao-intake-form.docx</i> and "
             "<i>/audrey-baliao-service-contract.docx</i>. The download "
             "links in <i>Rates.tsx</i> point at those paths.",
@@ -1291,27 +1321,28 @@ audrey-baliao-portfolio/
     story.extend(
         bullets(
             [
-                "<b>Nav</b> &mdash; on &lt;sm only the Roman numerals "
-                "show; the labels appear from sm up. The wordmark "
-                "(&ldquo;Audrey <i>Dhey</i>&rdquo;) is always visible.",
-                "<b>About hero</b> &mdash; H1 scales "
-                "<i>clamp(3.25rem, 9vw, 7.5rem)</i>. Portrait + meta "
-                "stack on mobile, 5/7 split on lg.",
-                "<b>Stories</b> &mdash; featured cards: 1 col on mobile, "
-                "2 on md+. Vlog gallery: 1 / 2 / 3 cols at sm / md / lg.",
-                "<b>Dreams</b> &mdash; the duo card stays 1-col on mobile "
-                "and splits Wings / Waves on md+.",
-                "<b>Travel</b> &mdash; stamp grid is 2-col on mobile and "
-                "above. Editorial side stacks below the stamps on &lt;lg.",
-                "<b>Rate sheet</b> &mdash; 1 / 3 col tiers, retainer "
-                "table is horizontally scrollable in narrow viewports.",
-                "<b>Connect</b> &mdash; social cards 1 / 3 col.",
+                "<b>Nav.</b> On &lt;sm only the Roman numerals show; the "
+                "labels appear from sm up. The wordmark (&ldquo;Audrey "
+                "<i>Dhey</i>&rdquo;) is always visible.",
+                "<b>About hero.</b> H1 scales <i>clamp(3.25rem, 9vw, "
+                "7.5rem)</i>. Portrait + meta stack on mobile, 5/7 split "
+                "on lg.",
+                "<b>Stories.</b> Vlog gallery: 1 / 2 / 3 cols at sm / md / "
+                "lg.",
+                "<b>Rate calculator.</b> 1 col on mobile (form then "
+                "estimate-card stacked); 2 cols on lg with the estimate "
+                "panel sticky at <i>top-24</i>. Hooks &amp; branding and "
+                "Add-ons collapse from 2-col to 1-col below sm.",
+                "<b>Rate sheet body.</b> Per-minute build + retainer split "
+                "on lg, stack on mobile. Discount cards 1 / 2 / 4 cols.",
+                "<b>Connect.</b> Email block fluidly stacks; social cards "
+                "1 / 2 / 4 cols.",
             ],
             s["Bullet"],
         )
     )
 
-    # 2.12 — Security posture + verbatim latest audit log
+    # 2.12: Security posture + verbatim latest audit log
     story.append(p("2.12  Security posture & latest audit", s["H2"]))
     story.append(
         p(
@@ -1324,12 +1355,12 @@ audrey-baliao-portfolio/
     story.extend(
         bullets(
             [
-                "<b>Security</b> &mdash; committed PATs, committed .env "
+                "<b>Security</b> , committed PATs, committed .env "
                 "files, <i>npm audit</i> (critical/high blocks the "
                 "deploy; moderate/low warns), and use of "
                 "<i>dangerouslySetInnerHTML</i> / <i>eval</i> / "
                 "<i>new&nbsp;Function</i>.",
-                "<b>Quality (grammar / a11y / leftovers)</b> &mdash; "
+                "<b>Quality (grammar / a11y / leftovers)</b> , "
                 "em-dashes in JSX (the AI-tell), images missing alt "
                 "text, leftover <i>console.*</i> calls, and TODO/FIXME "
                 "markers.",
@@ -1361,7 +1392,7 @@ audrey-baliao-portfolio/
     if not audit["exists"]:
         story.append(
             p(
-                "<i>No audit captured yet &mdash; the next "
+                "<i>No audit captured yet , the next "
                 "Deploy.command run will create "
                 "docs/audit-latest.txt.</i>",
                 s["Note"],
@@ -1385,12 +1416,12 @@ audrey-baliao-portfolio/
         if len(log_lines) > 80:
             log_lines = log_lines[:80] + [
                 "",
-                f"... (truncated &mdash; {len(raw.splitlines()) - 80} more "
+                f"... (truncated , {len(raw.splitlines()) - 80} more "
                 f"lines in docs/audit-latest.txt)",
             ]
         story.append(code_block("\n".join(log_lines), s["Code"]))
 
-    # 2.13 — Future enhancements
+    # 2.13: Future enhancements
     story.append(p("2.13  Future enhancements", s["H2"]))
     story.append(
         p(
@@ -1402,27 +1433,27 @@ audrey-baliao-portfolio/
     story.extend(
         bullets(
             [
-                "<b>Custom domain</b> &mdash; add via Vercel dashboard "
+                "<b>Custom domain.</b> Add via Vercel dashboard "
                 "(Project &rarr; Settings &rarr; Domains).",
-                "<b>Analytics</b> &mdash; Vercel Web Analytics is a "
-                "one-click toggle in the dashboard.",
-                "<b>Live rate calculator</b> &mdash; the pricing model "
-                "in <i>src/lib/pricing.ts</i> is already shaped for it. "
-                "Drop in a <i>RateCalculator.tsx</i> client component "
-                "that reads PRICING and emits a brief via mailto: or a "
-                "Gmail compose URL. The intake form already mirrors the "
-                "structure the calculator would expose.",
-                "<b>Real Sofia Pro</b> &mdash; replace the Sofia Sans "
-                "Google Fonts loader in <i>layout.tsx</i> with "
-                "<i>next/font/local</i>. Keep <i>variable: "
-                "--font-sans</i> &mdash; nothing else needs to change.",
-                "<b>Server-side inquiry capture</b> &mdash; if Audrey "
-                "wants inquiries to skip DMs, add an API route at "
-                "<i>src/app/api/inquiry/route.ts</i> + a small contact "
-                "form on Section VI. Resend or Nodemailer + Gmail SMTP "
+                "<b>Analytics.</b> Vercel Web Analytics is a one-click "
+                "toggle in the dashboard.",
+                "<b>Real Sofia Pro.</b> Replace the Sofia Sans Google "
+                "Fonts loader in <i>layout.tsx</i> with "
+                "<i>next/font/local</i>. Keep <i>variable: --font-sans</i>; "
+                "nothing else needs to change.",
+                "<b>Server-side inquiry capture.</b> If Audrey wants "
+                "inquiries to skip the client&rsquo;s mail app, add an API "
+                "route at <i>src/app/api/inquiry/route.ts</i> and POST to "
+                "it from the calculator. Resend or Nodemailer + Gmail SMTP "
                 "both work.",
-                "<b>i18n (Tagalog/English toggle)</b> &mdash; "
+                "<b>Admin page.</b> Protected route with a list of "
+                "received inquiries. Would require a database (Vercel "
+                "Postgres or Supabase).",
+                "<b>i18n (Tagalog/English toggle).</b> "
                 "<i>next-intl</i> drops in cleanly with the App Router.",
+                "<b>Project case studies.</b> Per-vlog detail pages at "
+                "<i>/stories/[slug]</i> with embedded video, client "
+                "testimonial, and BTS notes.",
             ],
             s["Bullet"],
         )

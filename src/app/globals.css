@@ -20,7 +20,7 @@
 }
 
 @layer components {
-  /* Reusable section eyebrow — display flex, hairline rule, generous tracking. */
+  /* Reusable section eyebrow: display flex, hairline rule, generous tracking. */
   .eyebrow {
     @apply flex items-baseline gap-x-5 border-b border-emerald-950/15 pb-3;
   }
@@ -37,7 +37,7 @@
     @apply ml-auto text-[10px] font-medium uppercase tracking-[0.25em] text-emerald-950/60;
   }
 
-  /* Tracked small-caps label — used everywhere the sister site used it. */
+  /* Tracked small-caps label, used in section eyebrows and metadata. */
   .label-caps {
     @apply text-[10px] font-semibold uppercase tracking-[0.25em];
   }
@@ -48,7 +48,7 @@
   }
 }
 
-/* Scroll-driven section rise — progressive enhancement only.
+/* Scroll-driven section rise. Progressive enhancement only.
    Browsers without animation-timeline simply show sections immediately. */
 @supports (animation-timeline: view()) {
   @keyframes section-rise {

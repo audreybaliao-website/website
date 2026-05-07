@@ -1,7 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 
 const META = [
-  { label: "Role", value: "Working student · creator" },
+  { label: "Role", value: "Working student · video editor" },
   { label: "Based", value: "Philippines" },
   { label: "On", value: "Instagram · Facebook · TikTok" },
 ] as const;
@@ -44,7 +44,7 @@ export default function About() {
         <div className="mt-20 grid grid-cols-1 gap-x-10 gap-y-12 lg:grid-cols-12">
           <figure className="lg:col-span-5">
             <div className="relative aspect-[3/4] w-full overflow-hidden bg-gradient-to-br from-emerald-100 via-ivory to-gold-300/40">
-              {/* Placeholder portrait — drop a real photo at
+              {/* Placeholder portrait. Drop a real photo at
                   /public/audrey-portrait.png and uncomment the <img>. */}
               {/* <img
                 src="/audrey-portrait.png"
@@ -85,34 +85,26 @@ export default function About() {
 
             <div className="mt-8 space-y-5 text-base leading-relaxed text-emerald-950/80">
               <p>
-                I'm Audrey — friends call me Dhey. I'm a working student in
-                the Philippines, juggling shifts and study and the small
-                magical bits in between, the way every working student does.
+                I&rsquo;m Audrey, and friends call me Dhey. I&rsquo;m a working
+                student in the Philippines, juggling shifts and study and the
+                small magical bits in between, the way every working student
+                does.
               </p>
               <p>
                 Cameras have been my favorite way to keep the in-between bits.
                 A bus window at golden hour, a coffee cup before a long shift,
                 a friend laughing at something dumb. I edit those into short
-                stories you can scroll through — daily-life vlogs, travel
-                wishlist edits, the occasional GRWM.
+                stories you can scroll through: daily-life vlogs, travel
+                wishlist edits, the occasional GRWM, music videos, and news
+                project pieces.
+              </p>
+              <p>
+                The bigger dream is to travel everywhere, then turn it all
+                into content. Wings or waves: flight attendant cabin crew, or
+                months at sea on a cruise ship. Either way, passport stamps
+                and stories.
               </p>
             </div>
-
-            <dl className="mt-10 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-              <div>
-                <dt className="label-caps text-gold-600">Mission</dt>
-                <dd className="mt-2 font-serif text-base italic text-emerald-950 md:text-lg">
-                  To turn ordinary days into stories worth keeping.
-                </dd>
-              </div>
-              <div>
-                <dt className="label-caps text-gold-600">Vision</dt>
-                <dd className="mt-2 font-serif text-base italic text-emerald-950 md:text-lg">
-                  To travel and tell stories from every place I land in —
-                  first as a flight attendant or aboard a cruise ship.
-                </dd>
-              </div>
-            </dl>
           </div>
         </div>
 

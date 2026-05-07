@@ -1,5 +1,5 @@
-2026-05-07 07:49:53 PDT
-=== Audrey Baliao Portfolio — System Audit ===
+2026-05-07 08:55:08 PDT
+=== Audrey Baliao Portfolio: System Audit ===
 
 ## SECURITY
 OK    pat-leak: no PATs in tracked files
@@ -8,33 +8,9 @@ OK    npm-audit: 0 vulnerabilities
 OK    dangerous-api: none in source
 
 ## QUALITY
-WARN  em-dash: src/app/opengraph-image.tsx:4:export const alt = "Audrey Baliao — Stories, dreams, everyday moments";
-WARN  em-dash: src/app/opengraph-image.tsx:74:        {/* Boarding-pass strip — hairline + two dots */}
-WARN  em-dash: src/app/layout.tsx:26:// loader (e.g. localFont) and keep `variable: "--font-sans"` — nothing else
-WARN  em-dash: src/app/layout.tsx:38:    default: "Audrey Baliao — Stories, dreams, everyday moments",
-WARN  em-dash: src/app/layout.tsx:59:    title: "Audrey Baliao — Stories, dreams, everyday moments",
-WARN  em-dash: src/app/layout.tsx:66:    title: "Audrey Baliao — Stories, dreams, everyday moments",
-WARN  em-dash: src/app/not-found.tsx:21:          Maybe a future stamp, maybe a typo. Either way — let's get you back
-WARN  em-dash: src/components/Nav.tsx:41:        // Mid-viewport band — section becomes "active" once its top crosses
-WARN  em-dash: src/components/Nav.tsx:58:          aria-label="Audrey Baliao — back to top"
-WARN  em-dash: src/components/sections/Travel.tsx:88:                in-between moments I keep filming — they all bend in the same
-WARN  em-dash: src/components/sections/Travel.tsx:93:                a week, some I'd live in for a month, and some — if the cards
-WARN  em-dash: src/components/sections/Travel.tsx:94:                fall right — I'd see from a cabin window on the way to the
-WARN  em-dash: src/components/sections/Dreams.tsx:21:    body: "To travel and experience everything — every airport, every coast, every city I haven't seen yet. Pin every map until the pins are the map.",
-WARN  em-dash: src/components/sections/Dreams.tsx:35:      footnote: "Either way — passport stamps and stories.",
-WARN  em-dash: src/components/sections/Dreams.tsx:42:    body: "Document the chase. Edit the moments. Build a feed that feels like a travel diary you can scroll — quiet enough to be honest, edited enough to keep.",
-WARN  em-dash: src/components/sections/Connect.tsx:10:// Inline TikTok glyph — lucide doesn't ship one, so we draw a tiny SVG that
-WARN  em-dash: src/components/sections/Connect.tsx:86:        {/* EMAIL — primary CTA for hiring inquiries */}
-WARN  em-dash: src/components/sections/Connect.tsx:132:        {/* SOCIALS — for casual hellos */}
-WARN  em-dash: src/components/sections/Rates.tsx:22: * Static rate sheet — no calculator. Three blocks:
-WARN  em-dash: src/components/sections/Rates.tsx:164:              raw footage with element-by-element complexity tiers — same model
-WARN  em-dash: src/components/sections/Rates.tsx:398:            These four are starting points — counter-offers are welcome. Send
-WARN  em-dash: src/components/sections/Rates.tsx:434:                  Fill in what you know — the rest we cover on a discovery
-WARN  em-dash: src/components/sections/Rates.tsx:466:                  ownership — everything in one signable Word doc.
-WARN  em-dash: src/components/sections/Stories.tsx:11: * YouTube thumbnails resolve automatically from the videoId — no need to
-WARN  em-dash: src/components/sections/Stories.tsx:46:      "A full music-video edit — pacing, color, and beat-matched cuts built around the track.",
+OK    em-dash: no em-dashes in JSX
 OK    missing-alt: all images have alt
 OK    console-leftover: no console.* in source
 OK    todo-marker: no TODO/FIXME
 
-STATUS: warnings (0 failing, 25 warning)
+STATUS: passed
