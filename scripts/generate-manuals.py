@@ -520,8 +520,10 @@ def build():
                 "(travel everywhere; flight attendant or cruise ship; "
                 "turn it all into content) without separate &lsquo;dreams&rsquo; "
                 "or &lsquo;travel&rsquo; sections.",
-                "<b>Showcases her work.</b> A 7-card vlog gallery, all on "
-                "YouTube. Thumbnails come from i.ytimg.com automatically.",
+                "<b>Showcases her editing portfolio.</b> A 7-card gallery "
+                "of videos she&rsquo;s edited, all hosted on YouTube. "
+                "Thumbnails come from i.ytimg.com automatically. Each card "
+                "carries an &ldquo;Edited by Audrey&rdquo; badge.",
                 "<b>Lets clients self-quote.</b> A live rate calculator "
                 "that builds a complete project brief and emails it to "
                 "Audrey with one click. Plus a per-minute breakdown, "
@@ -564,24 +566,27 @@ def build():
         p(
             "The first thing visitors see. Includes a "
             "&ldquo;Currently creating&rdquo; pulsing dot, the headline "
-            "&ldquo;Everyday moments, turned into stories,&rdquo; a portrait "
-            "frame, a role / based / on-platform meta strip, and three "
-            "paragraphs of bio. The bio absorbs what used to be separate "
-            "&lsquo;Dreams&rsquo; and &lsquo;Travel&rsquo; sections: who "
-            "Audrey is, what formats she edits (vlogs, travel wishlist "
-            "edits, GRWMs, music videos, news pieces), and the bigger "
-            "dream of travelling everywhere as a flight attendant or aboard "
-            "a cruise ship.",
+            "&ldquo;Raw footage, cut into stories,&rdquo; a portrait frame, "
+            "a Role / Based / Edits meta strip, and three paragraphs of "
+            "bio that establish Audrey as a video editor. The bio also "
+            "folds in what formats she edits (vlogs, music videos, news "
+            "pieces, travel wishlist edits, GRWMs) and the bigger dream "
+            "of travelling everywhere as a flight attendant or aboard a "
+            "cruise ship.",
             s["Body"],
         )
     )
 
-    story.append(p("II. Stories", s["H3"]))
+    story.append(p("II. Selected work (nav: &ldquo;Work&rdquo;)", s["H3"]))
     story.append(
         p(
-            "A 3-column gallery of 7 vlog edits, all on YouTube. "
-            "Thumbnails come from <i>i.ytimg.com</i> automatically. Each "
-            "card opens the actual video in a new tab.",
+            "Audrey&rsquo;s editing portfolio. A 3-column gallery of 7 "
+            "video edits she&rsquo;s done, all hosted on YouTube. Each "
+            "card carries an &ldquo;Edited by Audrey&rdquo; badge so it&rsquo;s "
+            "clear these are her cuts (the videos themselves were filmed "
+            "by clients). Thumbnails come from <i>i.ytimg.com</i> "
+            "automatically; each card opens the published video in a new "
+            "tab.",
             s["Body"],
         )
     )

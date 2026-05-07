@@ -1,9 +1,9 @@
 import { ArrowUpRight } from "lucide-react";
 
 const META = [
-  { label: "Role", value: "Working student · video editor" },
+  { label: "Role", value: "Video editor · working student" },
   { label: "Based", value: "Philippines" },
-  { label: "On", value: "Instagram · Facebook · TikTok" },
+  { label: "Edits", value: "Vlogs · music · news" },
 ] as const;
 
 export default function About() {
@@ -28,16 +28,16 @@ export default function About() {
         </div>
 
         <h1 className="mt-10 font-display text-[clamp(3.25rem,9vw,7.5rem)] font-light leading-[0.95] tracking-[-0.02em] text-emerald-950">
-          Everyday moments,
+          Raw footage,
           <br />
-          turned into{" "}
+          cut into{" "}
           <span className="italic text-gold-500">stories.</span>
         </h1>
 
         <p className="mt-10 max-w-2xl text-base leading-relaxed text-emerald-950/75 md:text-lg">
-          Working student. Daily-life storyteller. Travel-dreamer. I capture
-          the small, scrolling-by moments and edit them into something worth
-          remembering.
+          Video editor. Working student. Travel-dreamer. I take the raw
+          clips clients send over and shape them into something worth a
+          second scroll.
         </p>
 
         {/* 12-col grid: portrait left (5), prose + meta right (7). */}
@@ -87,22 +87,21 @@ export default function About() {
               <p>
                 I&rsquo;m Audrey, and friends call me Dhey. I&rsquo;m a working
                 student in the Philippines, juggling shifts and study and the
-                small magical bits in between, the way every working student
-                does.
+                small magical bits in between. By trade, I&rsquo;m a video
+                editor.
               </p>
               <p>
-                Cameras have been my favorite way to keep the in-between bits.
-                A bus window at golden hour, a coffee cup before a long shift,
-                a friend laughing at something dumb. I edit those into short
-                stories you can scroll through: daily-life vlogs, travel
-                wishlist edits, the occasional GRWM, music videos, and news
-                project pieces.
+                Editing is my favorite way to make a moment land. Hand me the
+                raw clips and I&rsquo;ll cut them into something worth
+                scrolling through: daily-life vlogs, music videos, news
+                pieces, travel wishlist edits, the occasional GRWM. Whatever
+                can be paced to rhythm.
               </p>
               <p>
-                The bigger dream is to travel everywhere, then turn it all
-                into content. Wings or waves: flight attendant cabin crew, or
-                months at sea on a cruise ship. Either way, passport stamps
-                and stories.
+                The bigger dream is to travel everywhere, then keep editing
+                from wherever I land. Wings or waves: flight attendant cabin
+                crew, or months at sea on a cruise ship. Either way, passport
+                stamps and stories.
               </p>
             </div>
           </div>
@@ -113,7 +112,7 @@ export default function About() {
             href="#stories"
             className="group inline-flex items-center gap-2 border-b border-emerald-950 pb-1 font-serif text-base text-emerald-950 transition hover:gap-3 hover:text-gold-600 hover:border-gold-500"
           >
-            See my stories
+            See my edits
             <ArrowUpRight className="h-4 w-4 transition group-hover:rotate-12" />
           </a>
           <a

@@ -3,11 +3,12 @@ import { ArrowUpRight, Play } from "lucide-react";
 /**
  * STORIES SECTION (II)
  * --------------------------------------------------------------------------
- * A vlog-edit gallery. YouTube thumbnails resolve automatically from the
- * videoId, no need to upload anything to /public/stories.
+ * Audrey's editing portfolio. Each card is a video she edited, linking out
+ * to where it lives (YouTube). YouTube thumbnails resolve automatically
+ * from the videoId, no upload to /public/stories needed.
  *
  * To update a card: edit the matching object below.
- * To add a new vlog: append to VLOGS. The grid auto-flows.
+ * To add an edit: append to VLOGS. The grid auto-flows.
  * --------------------------------------------------------------------------
  */
 
@@ -28,49 +29,49 @@ const VLOGS: readonly Vlog[] = [
     videoId: "HWc3wp7V0pI",
     url: "https://youtu.be/HWc3wp7V0pI",
     title: "Vlog · 01",
-    blurb: "Daily-life cut.",
+    blurb: "A vlog I edited.",
   },
   {
     id: "v02",
     videoId: "q3neWvXH3KA",
     url: "https://youtu.be/q3neWvXH3KA",
     title: "Vlog · 02",
-    blurb: "Daily-life cut.",
+    blurb: "A vlog I edited.",
   },
   {
     id: "v03",
     videoId: "vWZsN-FEa0U",
     url: "https://youtu.be/vWZsN-FEa0U",
     title: "Vlog · 03",
-    blurb: "Daily-life cut.",
+    blurb: "A vlog I edited.",
   },
   {
     id: "v04",
     videoId: "tkazmeKla3c",
     url: "https://youtu.be/tkazmeKla3c",
     title: "Vlog · 04",
-    blurb: "Daily-life cut.",
+    blurb: "A vlog I edited.",
   },
   {
     id: "v05",
     videoId: "wdeqDV_BxYM",
     url: "https://youtu.be/wdeqDV_BxYM",
     title: "Vlog · 05",
-    blurb: "Daily-life cut.",
+    blurb: "A vlog I edited.",
   },
   {
     id: "v06",
     videoId: "Fj7DknyXEKw",
     url: "https://youtu.be/Fj7DknyXEKw",
     title: "Vlog · 06",
-    blurb: "Daily-life cut.",
+    blurb: "A vlog I edited.",
   },
   {
     id: "v07",
     videoId: "RPyFMsgOfBY",
     url: "https://youtu.be/RPyFMsgOfBY",
     title: "Vlog · 07",
-    blurb: "Daily-life cut.",
+    blurb: "A vlog I edited.",
   },
 ] as const;
 
@@ -102,7 +103,7 @@ function VlogCard({ vlog }: { vlog: Vlog }) {
 
           <div className="absolute left-3 top-3">
             <span className="rounded-full bg-emerald-950/85 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.22em] text-ivory">
-              Vlog
+              Edited by Audrey
             </span>
           </div>
         </div>
@@ -113,13 +114,13 @@ function VlogCard({ vlog }: { vlog: Vlog }) {
           </h3>
           <dl className="mt-3 grid grid-cols-3 gap-x-4 border-t border-emerald-950/15 pt-3">
             <div>
-              <dt className="label-caps text-emerald-950/55">Format</dt>
+              <dt className="label-caps text-emerald-950/55">Type</dt>
               <dd className="mt-1 text-[11px] text-emerald-950">
-                Vlog · 16:9
+                Vlog edit
               </dd>
             </div>
             <div>
-              <dt className="label-caps text-emerald-950/55">Channel</dt>
+              <dt className="label-caps text-emerald-950/55">Hosted</dt>
               <dd className="mt-1 text-[11px] text-emerald-950">YouTube</dd>
             </div>
             <div className="text-right">
@@ -144,20 +145,20 @@ export default function Stories() {
           <span className="eyebrow__numeral" aria-hidden="true">
             II
           </span>
-          <span className="eyebrow__label">Stories</span>
+          <span className="eyebrow__label">Selected work</span>
           <span className="eyebrow__meta">
-            {VLOGS.length} vlog edits · still rolling
+            {VLOGS.length} edits · still rolling
           </span>
         </div>
 
         <div className="mt-10 grid grid-cols-1 items-end gap-6 lg:grid-cols-12">
           <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-light leading-[1] tracking-[-0.02em] text-emerald-950 lg:col-span-8">
-            Frames worth a second{" "}
-            <span className="italic text-gold-500">scroll.</span>
+            Cuts that{" "}
+            <span className="italic text-gold-500">ran.</span>
           </h2>
           <p className="text-sm leading-relaxed text-emerald-950/70 lg:col-span-4">
-            A rolling reel of vlog edits. The cuts I&rsquo;d want to find
-            again on a long bus ride.
+            A rolling portfolio of videos I&rsquo;ve edited. Each card opens
+            the published cut in a new tab.
           </p>
         </div>
 

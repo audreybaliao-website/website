@@ -10,7 +10,7 @@ type NavItem = {
 
 const ITEMS: readonly NavItem[] = [
   { numeral: "I", label: "Hello", id: "about" },
-  { numeral: "II", label: "Stories", id: "stories" },
+  { numeral: "II", label: "Work", id: "stories" },
   { numeral: "III", label: "Rates", id: "rates" },
   { numeral: "IV", label: "Connect", id: "connect" },
 ] as const;
