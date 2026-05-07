@@ -103,6 +103,19 @@ export default function About() {
                 crew, or months at sea on a cruise ship. Either way, passport
                 stamps and stories.
               </p>
+
+              <p className="border-t border-emerald-950/15 pt-5 font-serif text-sm italic text-emerald-950/65">
+                This whole site is thanks to my friend{" "}
+                <a
+                  href="https://erickcabal.com"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="not-italic font-semibold text-emerald-950 underline-offset-4 transition hover:text-gold-600 hover:underline"
+                >
+                  Erick
+                </a>
+                , who built it for me.
+              </p>
             </div>
           </div>
         </div>

@@ -67,7 +67,7 @@ export default function Rates() {
         </div>
 
         {/* PER-MINUTE BREAKDOWN */}
-        <div className="mt-24 grid grid-cols-1 gap-x-12 gap-y-12 lg:grid-cols-12">
+        <div className="mt-20 grid grid-cols-1 gap-x-12 gap-y-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <div className="flex items-baseline gap-x-5 border-b border-emerald-950/15 pb-3">
               <span className="font-display text-2xl italic leading-none text-gold-500">
