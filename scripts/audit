@@ -1,0 +1,204 @@
+#!/usr/bin/env bash
+# scripts/audit — automated pre-deploy checks for the Audrey Baliao
+# Portfolio site. Output is plain-text and machine-parseable: each finding
+# is on its own line in the form `LEVEL  code: message`. Deploy.command
+# captures stdout+stderr to docs/audit-latest.txt, then the manual generator
+# reads that log and embeds it into the Manual PDF.
+#
+# Exit code:
+#   0  → passed OR warnings (deploy proceeds)
+#   1  → failed             (deploy is blocked)
+
+set -u
+cd "$(dirname "$0")/.."
+
+date '+%Y-%m-%d %H:%M:%S %Z'
+echo "=== Audrey Baliao Portfolio — System Audit ==="
+echo ""
+
+WARN_COUNT=0
+FAIL_COUNT=0
+
+ok()   { printf 'OK    %s: %s\n' "$1" "$2"; }
+warn() { printf 'WARN  %s: %s\n' "$1" "$2"; WARN_COUNT=$((WARN_COUNT + 1)); }
+fail() { printf 'FAIL  %s: %s\n' "$1" "$2"; FAIL_COUNT=$((FAIL_COUNT + 1)); }
+
+# When run before the first git commit (git ls-files returns nothing), fall
+# back to a tracked-files-equivalent: every file in the working tree minus
+# anything matched by .gitignore.
+list_files() {
+  if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    if [ -n "$(git ls-files 2>/dev/null)" ]; then
+      git ls-files
+      return
+    fi
+  fi
+  # Fallback: walk the tree, exclude common build dirs.
+  find . \
+    \( -path './node_modules' -o -path './.next' -o -path './.git' \
+       -o -path './out' -o -path './dist' \) -prune -o \
+    -type f -print | sed 's|^\./||'
+}
+
+# ---------------------------------------------------------------------------
+# SECURITY
+# ---------------------------------------------------------------------------
+echo "## SECURITY"
+
+# 1. GitHub PAT in any tracked file. Delegated to scripts/_check_pat.py
+#    because PDF text is zlib-compressed and invisible to plain grep/strings.
+PAT_HITS=$(list_files | python3 scripts/_check_pat.py 2>/dev/null || true)
+if [ -n "$PAT_HITS" ]; then
+  printf '%s\n' "$PAT_HITS" | while IFS= read -r f; do
+    [ -n "$f" ] && fail pat-leak "$f"
+  done
+  HITS=$(printf '%s\n' "$PAT_HITS" | grep -c .)
+  FAIL_COUNT=$((FAIL_COUNT + HITS))
+else
+  ok pat-leak "no PATs in tracked files"
+fi
+
+# 2. .env files committed
+ENV_HITS=$(list_files | grep -E '(^|/)\.env($|\.)' || true)
+if [ -n "$ENV_HITS" ]; then
+  printf '%s\n' "$ENV_HITS" | while IFS= read -r f; do
+    [ -n "$f" ] && fail env-committed "$f"
+  done
+  HITS=$(printf '%s\n' "$ENV_HITS" | grep -c .)
+  FAIL_COUNT=$((FAIL_COUNT + HITS))
+else
+  ok env-committed "no .env files tracked"
+fi
+
+# 3. npm audit (production deps only) — fail on critical/high, warn on rest.
+if command -v npm >/dev/null 2>&1; then
+  AUDIT_JSON=$(npm audit --omit=dev --json 2>/dev/null || true)
+  if [ -n "$AUDIT_JSON" ]; then
+    COUNTS=$(printf '%s' "$AUDIT_JSON" | python3 - <<'PY'
+import json, sys
+try:
+    d = json.load(sys.stdin)
+    m = d.get("metadata", {}).get("vulnerabilities", {})
+    print(m.get("critical", 0), m.get("high", 0),
+          m.get("moderate", 0), m.get("low", 0))
+except Exception:
+    print(0, 0, 0, 0)
+PY
+)
+    set -- $COUNTS
+    C=${1:-0}; H=${2:-0}; M=${3:-0}; L=${4:-0}
+    if [ "$C" -gt 0 ] || [ "$H" -gt 0 ]; then
+      fail npm-audit "critical=$C high=$H moderate=$M low=$L (run: npm update next)"
+    elif [ "$M" -gt 0 ] || [ "$L" -gt 0 ]; then
+      warn npm-audit "moderate=$M low=$L (run: npm update next)"
+    else
+      ok npm-audit "0 vulnerabilities"
+    fi
+  else
+    warn npm-audit "could not run npm audit"
+  fi
+else
+  warn npm-audit "npm not available in this shell"
+fi
+
+# 4. dangerouslySetInnerHTML / eval / new Function in src
+DANGEROUS=$(list_files | grep '^src/' \
+  | xargs grep -lE "(dangerouslySetInnerHTML|\beval\(|new Function\()" 2>/dev/null || true)
+if [ -n "$DANGEROUS" ]; then
+  printf '%s\n' "$DANGEROUS" | while IFS= read -r f; do
+    [ -n "$f" ] && fail dangerous-api "$f"
+  done
+  HITS=$(printf '%s\n' "$DANGEROUS" | grep -c .)
+  FAIL_COUNT=$((FAIL_COUNT + HITS))
+else
+  ok dangerous-api "none in source"
+fi
+
+echo ""
+# ---------------------------------------------------------------------------
+# QUALITY (a.k.a. grammar / AI-tell / a11y / leftovers)
+# ---------------------------------------------------------------------------
+echo "## QUALITY"
+
+# 5. Em-dashes in JSX/TSX text — the AI-writing tell. Limit to 25 reports
+#    so a copy-heavy file doesn't drown the log.
+EMDASH=$(list_files | grep -E '^src/.+\.tsx$' \
+  | xargs grep -nF $'\xe2\x80\x94' 2>/dev/null \
+  | head -25 || true)
+if [ -n "$EMDASH" ]; then
+  printf '%s\n' "$EMDASH" | while IFS= read -r line; do
+    [ -n "$line" ] && warn em-dash "$line"
+  done
+  HITS=$(printf '%s\n' "$EMDASH" | grep -c .)
+  WARN_COUNT=$((WARN_COUNT + HITS))
+else
+  ok em-dash "no em-dashes in JSX"
+fi
+
+# 6. <img> / <Image ...> tags missing alt= attribute. Use Python so we can
+#    span multi-line tags reliably.
+NO_ALT=$(list_files | grep -E '^src/.+\.tsx$' | python3 - <<'PY' || true
+import re, sys
+for path in (line.strip() for line in sys.stdin if line.strip()):
+    try:
+        text = open(path, "r", encoding="utf-8").read()
+    except Exception:
+        continue
+    # Match <img …> and <Image …> tags (self-closing or with children).
+    for m in re.finditer(r"<(img|Image)\b([^>]*?)/?>", text, flags=re.S):
+        block = m.group(0)
+        if "alt=" not in block:
+            line_no = text[: m.start()].count("\n") + 1
+            print(f"{path}:{line_no}: <{m.group(1)}> with no alt")
+PY
+)
+if [ -n "$NO_ALT" ]; then
+  printf '%s\n' "$NO_ALT" | while IFS= read -r line; do
+    [ -n "$line" ] && warn missing-alt "$line"
+  done
+  HITS=$(printf '%s\n' "$NO_ALT" | grep -c .)
+  WARN_COUNT=$((WARN_COUNT + HITS))
+else
+  ok missing-alt "all images have alt"
+fi
+
+# 7. console.log / warn / error left in source
+CONSOLE=$(list_files | grep '^src/' \
+  | xargs grep -nE "console\.(log|warn|error)" 2>/dev/null || true)
+if [ -n "$CONSOLE" ]; then
+  printf '%s\n' "$CONSOLE" | while IFS= read -r line; do
+    [ -n "$line" ] && warn console-leftover "$line"
+  done
+  HITS=$(printf '%s\n' "$CONSOLE" | grep -c .)
+  WARN_COUNT=$((WARN_COUNT + HITS))
+else
+  ok console-leftover "no console.* in source"
+fi
+
+# 8. TODO / FIXME / XXX / HACK markers
+TODOS=$(list_files | grep '^src/' \
+  | xargs grep -nE "(TODO|FIXME|XXX|HACK)" 2>/dev/null || true)
+if [ -n "$TODOS" ]; then
+  printf '%s\n' "$TODOS" | while IFS= read -r line; do
+    [ -n "$line" ] && warn todo-marker "$line"
+  done
+  HITS=$(printf '%s\n' "$TODOS" | grep -c .)
+  WARN_COUNT=$((WARN_COUNT + HITS))
+else
+  ok todo-marker "no TODO/FIXME"
+fi
+
+echo ""
+# ---------------------------------------------------------------------------
+# STATUS LINE — must be the last line; the parser keys off it.
+# ---------------------------------------------------------------------------
+if [ "$FAIL_COUNT" -gt 0 ]; then
+  printf 'STATUS: failed (%d failing, %d warning)\n' "$FAIL_COUNT" "$WARN_COUNT"
+  exit 1
+elif [ "$WARN_COUNT" -gt 0 ]; then
+  printf 'STATUS: warnings (0 failing, %d warning)\n' "$WARN_COUNT"
+  exit 0
+else
+  printf 'STATUS: passed\n'
+  exit 0
+fi

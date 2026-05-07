@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: theme(colors.emerald.950);
+    color: theme(colors.gold.300);
+  }
+
+  body {
+    font-feature-settings: "ss01", "cv11";
+  }
+}
+
+@layer components {
+  /* Reusable section eyebrow — display flex, hairline rule, generous tracking. */
+  .eyebrow {
+    @apply flex items-baseline gap-x-5 border-b border-emerald-950/15 pb-3;
+  }
+
+  .eyebrow__numeral {
+    @apply font-display text-2xl text-gold-500 italic leading-none;
+  }
+
+  .eyebrow__label {
+    @apply text-[10px] font-semibold uppercase tracking-[0.25em] text-emerald-950;
+  }
+
+  .eyebrow__meta {
+    @apply ml-auto text-[10px] font-medium uppercase tracking-[0.25em] text-emerald-950/60;
+  }
+
+  /* Tracked small-caps label — used everywhere the sister site used it. */
+  .label-caps {
+    @apply text-[10px] font-semibold uppercase tracking-[0.25em];
+  }
+
+  /* Hairline horizontal rule. */
+  .rule {
+    @apply h-px w-full bg-emerald-950/15;
+  }
+}
+
+/* Scroll-driven section rise — progressive enhancement only.
+   Browsers without animation-timeline simply show sections immediately. */
+@supports (animation-timeline: view()) {
+  @keyframes section-rise {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  main > section {
+    animation: section-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  main > section {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
