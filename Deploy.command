@@ -1,12 +1,12 @@
 #!/bin/bash
-# Audrey Baliao Portfolio: one-click deploy
+# Dhey Creates: one-click deploy
 # Double-click this file to push your latest changes live to Vercel.
 
 set -u
 cd "$(dirname "$0")"
 
 printf '\n========================================\n'
-printf '   Audrey Baliao Portfolio: Deploy\n'
+printf '   Dhey Creates · Audrey Baliao : Deploy\n'
 printf '========================================\n\n'
 
 if [ ! -d ".git" ]; then
@@ -33,7 +33,7 @@ if [ "$AUDIT_EXIT" -ne 0 ]; then
 fi
 echo ""
 
-echo "📄 Refreshing manuals (docs/Audrey Baliao Portfolio - Manual.pdf)..."
+echo "📄 Refreshing manuals (docs/Dhey Creates - Manual.pdf)..."
 if python3 scripts/generate-manuals.py 2>&1; then
   echo "   Done."
 else

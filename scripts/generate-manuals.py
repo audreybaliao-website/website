@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Regenerate the combined User & Technical manual PDF for Audrey Baliao's
-portfolio site.
+Regenerate the combined User & Technical manual PDF for Dhey Creates,
+the editing portfolio of Audrey Baliao.
 
-Output: docs/Audrey Baliao Portfolio - Manual.pdf
+Output: docs/Dhey Creates - Manual.pdf
 
 Run:    python3 scripts/generate-manuals.py
 Hook:   wired into Deploy.command so every push refreshes the PDF.
@@ -62,7 +62,7 @@ except ImportError:
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
 DOCS.mkdir(exist_ok=True)
-OUTPUT = DOCS / "Audrey Baliao Portfolio - Manual.pdf"
+OUTPUT = DOCS / "Dhey Creates - Manual.pdf"
 
 
 # ---------------------------------------------------------------------------
@@ -333,7 +333,7 @@ def page_chrome(canvas, doc):
     canvas.setFillColor(MUTED)
     # Footer
     canvas.drawString(
-        0.75 * inch, 0.5 * inch, "Audrey Baliao: Personal Portfolio"
+        0.75 * inch, 0.5 * inch, "Dhey Creates · Audrey Baliao, Video Editor"
     )
     canvas.drawRightString(
         letter[0] - 0.75 * inch, 0.5 * inch, f"Page {doc.page}"
@@ -425,8 +425,8 @@ def build():
 
     # ---- Cover ----------------------------------------------------------
     story.append(Spacer(1, 0.6 * inch))
-    story.append(p("Audrey Baliao", s["Title"]))
-    story.append(p("Personal Portfolio Website", s["Subtitle"]))
+    story.append(p("Dhey Creates", s["Title"]))
+    story.append(p("Audrey Baliao · Video Editor Portfolio", s["Subtitle"]))
     story.append(Spacer(1, 0.4 * inch))
     story.append(p("User &amp; Technical Manual", s["H2"]))
     story.append(Spacer(1, 0.15 * inch))
@@ -937,13 +937,13 @@ maria@example.com"""
     structure = """\
 audrey-baliao-portfolio/
 ├── docs/                                      ← this PDF lives here
-│   ├── Audrey Baliao Portfolio - Manual.pdf
+│   ├── Dhey Creates - Manual.pdf
 │   └── audit-latest.txt
 ├── public/                                    ← static assets (served at /)
 │   ├── audrey-portrait.png                    ← drop in real photo
 │   ├── stories/                               ← optional override thumbs
-│   ├── audrey-baliao-intake-form.docx         ← downloadable form
-│   └── audrey-baliao-service-contract.docx    ← downloadable contract
+│   ├── dhey-creates-intake-form.docx         ← downloadable form
+│   └── dhey-creates-service-contract.docx    ← downloadable contract
 ├── scripts/
 │   ├── audit                                  ← pre-deploy audit gate (bash)
 │   ├── _check_pat.py                          ← PAT scanner used by audit
@@ -1142,7 +1142,7 @@ audrey-baliao-portfolio/
             "    │  (1) runs scripts/audit (security + grammar/quality)\n"
             "    │       FAIL  → deploy is blocked\n"
             "    │       WARN  → deploy proceeds, items logged\n"
-            "    │  (2) regenerates docs/Audrey Baliao Portfolio - Manual.pdf\n"
+            "    │  (2) regenerates docs/Dhey Creates - Manual.pdf\n"
             "    │  (3) git add -A\n"
             "    │  (4) git commit -m 'Update on <date>'\n"
             "    │  (5) git push origin HEAD:main\n"
@@ -1307,8 +1307,8 @@ audrey-baliao-portfolio/
             "function. Re-run <i>python3 scripts/generate-forms.py</i> to "
             "regenerate the .docx files in <i>public/</i>. Commit and "
             "push as usual , the new versions are served at "
-            "<i>/audrey-baliao-intake-form.docx</i> and "
-            "<i>/audrey-baliao-service-contract.docx</i>. The download "
+            "<i>/dhey-creates-intake-form.docx</i> and "
+            "<i>/dhey-creates-service-contract.docx</i>. The download "
             "links in <i>Rates.tsx</i> point at those paths.",
             s["Body"],
         )
@@ -1482,7 +1482,7 @@ audrey-baliao-portfolio/
         rightMargin=0.75 * inch,
         topMargin=0.85 * inch,
         bottomMargin=0.7 * inch,
-        title="Audrey Baliao Portfolio - Manual",
+        title="Dhey Creates - Manual",
         author="Erick Cabal",
     )
     doc.build(story, onFirstPage=page_chrome, onLaterPages=page_chrome)

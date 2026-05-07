@@ -176,7 +176,10 @@ export default function Connect() {
         <footer className="mt-24 border-t border-emerald-950/15 pt-8">
           <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-baseline sm:justify-between">
             <p className="font-serif text-sm text-emerald-950/80">
-              © {year} · Audrey Baliao
+              © {year} ·{" "}
+              <span className="font-semibold">Dhey Creates</span>
+              {" · "}
+              Audrey Baliao
             </p>
             <p className="label-caps text-emerald-950/55">
               Site by{" "}
@@ -186,7 +189,7 @@ export default function Connect() {
                 rel="noreferrer noopener"
                 className="text-emerald-950/80 underline-offset-4 transition hover:text-gold-600 hover:underline"
               >
-                Erick Jhon Cabal
+                Erick Cabal
               </a>
             </p>
           </div>

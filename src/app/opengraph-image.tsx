@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Audrey Baliao · Stories, dreams, everyday moments";
+export const alt = "Dhey Creates · Audrey Baliao, video editor";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -49,26 +49,38 @@ export default async function Image() {
       >
         <div
           style={{
+            fontFamily: "Italianno",
+            fontSize: 260,
+            color: "#d8a83a",
+            lineHeight: 1,
+          }}
+        >
+          Dhey
+        </div>
+        <div
+          style={{
             fontFamily: "Merriweather",
-            fontSize: 160,
+            fontSize: 110,
             fontWeight: 900,
             color: "#0a2418",
             letterSpacing: "-0.02em",
             lineHeight: 1,
+            marginTop: -20,
           }}
         >
-          Audrey
+          Creates
         </div>
         <div
           style={{
-            fontFamily: "Italianno",
-            fontSize: 220,
-            color: "#d8a83a",
-            lineHeight: 1,
-            marginTop: -10,
+            fontFamily: "Merriweather",
+            fontSize: 22,
+            color: "#0a2418",
+            opacity: 0.7,
+            marginTop: 20,
+            letterSpacing: "0.05em",
           }}
         >
-          Dhey
+          Audrey Baliao · Video Editor
         </div>
 
         {/* Boarding-pass strip: hairline + two dots */}
@@ -119,8 +131,8 @@ export default async function Image() {
             opacity: 0.7,
           }}
         >
-          <span>Stories · Dreams · Travel</span>
-          <span>Audrey Baliao</span>
+          <span>Vlogs · Music · News</span>
+          <span>Dhey Creates</span>
         </div>
       </div>
     ),

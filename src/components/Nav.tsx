@@ -53,13 +53,13 @@ export default function Nav() {
         <a
           href="#about"
           className="flex items-baseline gap-2 text-emerald-950 transition hover:opacity-80"
-          aria-label="Audrey Baliao, back to top"
+          aria-label="Dhey Creates, back to top"
         >
-          <span className="font-serif text-base font-bold tracking-tight">
-            Audrey
-          </span>
           <span className="font-script text-3xl leading-none text-gold-500">
             Dhey
+          </span>
+          <span className="font-serif text-xs font-bold uppercase tracking-[0.25em]">
+            Creates
           </span>
         </a>
 

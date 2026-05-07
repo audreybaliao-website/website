@@ -117,11 +117,11 @@ def add_letterhead(doc):
 
     left = t.rows[0].cells[0]
     p1 = left.paragraphs[0]
-    r1 = p1.add_run("Audrey Baliao")
-    style_run(r1, size=22, bold=True, color=EMERALD_950)
+    r1 = p1.add_run("Dhey Creates")
+    style_run(r1, size=24, bold=True, color=EMERALD_950)
     p2 = left.add_paragraph()
-    r2 = p2.add_run("Video Editor · Daily-life storyteller")
-    style_run(r2, size=11, color=EMERALD_700)
+    r2 = p2.add_run("Audrey Baliao · Video Editor")
+    style_run(r2, size=10.5, color=EMERALD_700)
 
     right = t.rows[0].cells[1]
     contact_lines = [
@@ -286,7 +286,7 @@ def build_intake_form() -> Path:
     body(doc, "Anything else you would like me to know:")
     fill_lines(doc, 3)
 
-    out = PUBLIC / "audrey-baliao-intake-form.docx"
+    out = PUBLIC / "dhey-creates-intake-form.docx"
     doc.save(str(out))
     return out
 
@@ -452,7 +452,7 @@ def build_service_contract() -> Path:
     field(doc, "Printed name", BLANK_LONG)
     field(doc, "Date", BLANK_MED)
 
-    out = PUBLIC / "audrey-baliao-service-contract.docx"
+    out = PUBLIC / "dhey-creates-service-contract.docx"
     doc.save(str(out))
     return out
 

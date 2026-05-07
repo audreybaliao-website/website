@@ -1,4 +1,4 @@
-# Claude handoff: Audrey Baliao Portfolio
+# Claude handoff: Dhey Creates (Audrey Baliao Portfolio)
 
 > **Read this first** when you (Claude) open this project in a fresh session.
 > Everything you need to keep working without re-asking the user is below.
@@ -96,12 +96,12 @@ into the About bio. **Don't add them back unless explicitly asked.**
 | `Deploy.command` | Double-click on macOS. Runs audit → regenerates manual → commits → pushes. Vercel rebuilds within ~90 seconds of the push. |
 | `scripts/audit` | Pre-deploy bash audit. Blocks deploy on FAILs (PAT leak, .env, npm critical/high, dangerous APIs); warns (doesn't block) on em-dashes, missing `alt=`, `console.*`, TODO/FIXME. |
 | `scripts/_check_pat.py` | PAT scanner used by audit (handles PDF zlib decoding via `pypdf`). |
-| `scripts/generate-forms.py` | Regenerates `public/audrey-baliao-intake-form.docx` + `public/audrey-baliao-service-contract.docx`. |
-| `scripts/generate-manuals.py` | Regenerates `docs/Audrey Baliao Portfolio - Manual.pdf`. Embeds the latest audit log into both Part 1 and Part 2. |
+| `scripts/generate-forms.py` | Regenerates `public/dhey-creates-intake-form.docx` + `public/dhey-creates-service-contract.docx`. |
+| `scripts/generate-manuals.py` | Regenerates `docs/Dhey Creates - Manual.pdf`. Embeds the latest audit log into both Part 1 and Part 2. |
 | `docs/audit-latest.txt` | Plain-text output of the most recent audit run. |
-| `docs/Audrey Baliao Portfolio - Manual.pdf` | Two-part manual: Part 1 = User Manual (non-technical, for Audrey), Part 2 = Technical Manual (for any future developer). |
-| `public/audrey-baliao-intake-form.docx` | Word-doc intake form on letterhead. Linked from Section III. |
-| `public/audrey-baliao-service-contract.docx` | Service contract on letterhead. Linked from Section III. |
+| `docs/Dhey Creates - Manual.pdf` | Two-part manual: Part 1 = User Manual (non-technical, for Audrey), Part 2 = Technical Manual (for any future developer). |
+| `public/dhey-creates-intake-form.docx` | Word-doc intake form on letterhead. Linked from Section III. |
+| `public/dhey-creates-service-contract.docx` | Service contract on letterhead. Linked from Section III. |
 
 ## Common commands
 

@@ -85,10 +85,13 @@ export default function About() {
 
             <div className="mt-8 space-y-5 text-base leading-relaxed text-emerald-950/80">
               <p>
-                I&rsquo;m Audrey, and friends call me Dhey. I&rsquo;m a working
-                student in the Philippines, juggling shifts and study and the
-                small magical bits in between. By trade, I&rsquo;m a video
-                editor.
+                I&rsquo;m <strong className="font-semibold not-italic text-emerald-950">Audrey Baliao</strong>,
+                and friends call me Dhey. I&rsquo;m a working student in
+                the Philippines, juggling shifts and study and the small
+                magical bits in between. By trade, I&rsquo;m a video
+                editor; this is{" "}
+                <span className="italic">Dhey Creates</span>, my
+                portfolio.
               </p>
               <p>
                 Editing is my favorite way to make a moment land. Hand me the
@@ -105,14 +108,14 @@ export default function About() {
               </p>
 
               <p className="border-t border-emerald-950/15 pt-5 font-serif text-sm italic text-emerald-950/65">
-                This whole site is thanks to my friend{" "}
+                This whole site is thanks to my friend,{" "}
                 <a
                   href="https://erickcabal.com"
                   target="_blank"
                   rel="noreferrer noopener"
                   className="not-italic font-semibold text-emerald-950 underline-offset-4 transition hover:text-gold-600 hover:underline"
                 >
-                  Erick
+                  Erick Cabal
                 </a>
                 , who built it for me.
               </p>

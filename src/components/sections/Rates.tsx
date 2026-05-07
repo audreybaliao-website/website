@@ -92,7 +92,7 @@ export default function Rates() {
               <div className="flex items-baseline justify-between border-b border-emerald-950/10 py-2">
                 <dt className="label-caps text-emerald-950/65">Intro / outro</dt>
                 <dd className="font-serif text-sm tabular-nums text-emerald-950">
-                  {peso(PRICING.introFee)} ea
+                  {peso(PRICING.introFee)} each
                 </dd>
               </div>
               <div className="flex items-baseline justify-between border-b border-emerald-950/10 py-2">
@@ -116,7 +116,7 @@ export default function Rates() {
               <div className="flex items-baseline justify-between border-b border-emerald-950/10 py-2">
                 <dt className="label-caps text-emerald-950/65">Extra export</dt>
                 <dd className="font-serif text-sm tabular-nums text-emerald-950">
-                  {peso(PRICING.extraExportFee)} ea
+                  {peso(PRICING.extraExportFee)} each
                 </dd>
               </div>
               <div className="flex items-baseline justify-between border-b border-emerald-950/10 py-2 sm:col-span-2">
@@ -335,7 +335,7 @@ export default function Rates() {
           <ul className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
             <li>
               <a
-                href="/audrey-baliao-intake-form.docx"
+                href="/dhey-creates-intake-form.docx"
                 download
                 className="group flex h-full flex-col gap-3 border border-emerald-950/15 bg-ivory p-6 transition hover:border-emerald-950"
               >
@@ -360,13 +360,13 @@ export default function Rates() {
                     className="h-3.5 w-3.5"
                     aria-hidden="true"
                   />
-                  audrey-baliao-intake-form.docx
+                  dhey-creates-intake-form.docx
                 </span>
               </a>
             </li>
             <li>
               <a
-                href="/audrey-baliao-service-contract.docx"
+                href="/dhey-creates-service-contract.docx"
                 download
                 className="group flex h-full flex-col gap-3 border border-emerald-950/15 bg-ivory p-6 transition hover:border-emerald-950"
               >
@@ -391,7 +391,7 @@ export default function Rates() {
                     className="h-3.5 w-3.5"
                     aria-hidden="true"
                   />
-                  audrey-baliao-service-contract.docx
+                  dhey-creates-service-contract.docx
                 </span>
               </a>
             </li>
